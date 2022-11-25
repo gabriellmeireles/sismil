@@ -50,11 +50,11 @@ class LoginController extends Controller
     {
         $input = $request->all();
         $this->validate($request, [
-            'email' => 'required|email',
+            'cpf' => 'required|max:11',
             'password' => 'required'
         ]);
 
-        if (auth()->attempt(array('email'=>$input['email'], 'password'=>$input['password']))) {
+        if (auth()->attempt(array('cpf'=>$input['cpf'], 'password'=>$input['password']))) {
             if (auth()->user()->user_type_id == 7) {
                 return redirect()->route('user.dashboard');
             } else {
@@ -62,7 +62,7 @@ class LoginController extends Controller
             }
             
         }else{
-            return redirect()->route('login')->with('error', 'Email ou senha incorretos');
+            return redirect()->route('login')->with('error', 'Login ou senha incorretos');
         }
         
     }

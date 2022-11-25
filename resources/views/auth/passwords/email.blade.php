@@ -1,47 +1,50 @@
-@extends('layouts.app')
-
+@extends('layouts.auth')
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Reset Password') }}</div>
 
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
+<div class="bg-image"
+    style="background-image: url('static/background_sismil.jpg'); background-repeat: no-repeat;background-attachment: fixed;background-position: center; height: 100vh">
+    <div class="page page-center">
+        <div class="container-tight py-4">
+            <div class="text-center mb-4">
+                <a href="." class="navbar-brand navbar-brand-autodark"><img src="./static/logo.png" height="80" alt="SISMIL"></a>
+            </div>
+            <div>
 
-                    <form method="POST" action="{{ route('password.email') }}">
-                        @csrf
-
-                        <div class="row mb-3">
-                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
-
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Send Password Reset Link') }}
-                                </button>
-                            </div>
-                        </div>
-                    </form>
+                @if (Session::get('error'))
+                <div class="alert alert-warning">
+                    {!! Session::get('error') !!}
                 </div>
+                @endif
+
+                @if (Session::get('success'))
+                <div class="alert alert-success">
+                    {!! Session::get('success') !!}
+                </div>
+                @endif
+
+                <form class="card card-md" action="{{ route('password.email') }}" method="post" autocomplete="off">
+                    @csrf
+                    
+                    <div class="card-body">
+                        <h2 class="card-title text-center mb-4">{{ __('Esqueceu a senha?') }}</h2>
+                        
+                        <div class="mb-3">
+                            <label class="form-label">{{ __('Email') }}</label>
+                            <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"  name="email" value="{{ old('email') }}" placeholder="Email" autocomplete="off" autofocus>
+                            @error('email')<span class="text-danger">{{ $message }}</span>@enderror
+                        </div>
+                        
+                        <div class="form-footer">
+                            <button type="submit" class="btn btn-primary w-100">Enviar Link de Redefinição de Senha</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="text-center text-muted mt-3">
+                Voltar para a tela de <a href="{{route('login')}}" tabindex="-1">Login</a>
             </div>
         </div>
     </div>
 </div>
+
 @endsection
