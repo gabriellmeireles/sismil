@@ -17,6 +17,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserTypeSeeder::class,
+            RankDegreeSeeder::class,
+            CombatArmSeeder::class,
+            SectionSeeder::class,
+            UserSeeder::class,
+            AdminSeeder::class,
         ]);
     }
 }
