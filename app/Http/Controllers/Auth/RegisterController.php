@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -51,6 +52,7 @@ class RegisterController extends Controller
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
+            'cpf' => ['required', 'string', 'max:11', 'unique:users'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
@@ -62,12 +64,32 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\Models\User
      */
-    protected function create(array $data)
+    /* protected function create(array $data)
     {
         return User::create([
             'name' => $data['name'],
+            'cpf' => $data['cpf'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'status' => 1,
+            'user_type_id' => 7
         ]);
+    } */
+
+    public function register(Request $request)
+    {
+        $user = new User();
+        $user->name = $request->name;
+        $user->cpf = $request->cpf;
+        $user->email = $request->email;
+        $user->password = Hash::make($request->password);
+        $user->status = 1;
+        $user->user_type_id = 7;
+
+        if ($user->save()) {
+            return redirect()->route('login')->with('success','Usuário criado com sucesso!');
+        }else{
+            return redirect()->back()->with('error','Erro ao se registrar, tente novamente.');
+        }
     }
 }

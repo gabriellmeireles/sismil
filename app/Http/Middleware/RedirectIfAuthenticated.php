@@ -22,9 +22,16 @@ class RedirectIfAuthenticated
         $guards = empty($guards) ? [null] : $guards;
 
         foreach ($guards as $guard) {
-            if (Auth::guard($guard)->check()) {
+            /* if (Auth::guard($guard)->check()) {
                 return redirect(RouteServiceProvider::HOME);
+            } */
+
+            if (Auth::guard($guard)->check() && Auth::user()->user_type_id == 7) {
+                return redirect()->route('user.dashboard');
+            } elseif(Auth::guard($guard)->check() && Auth::user()->user_type_id != 7) {
+                return redirect()->route('admin.dashboard');
             }
+            
         }
 
         return $next($request);

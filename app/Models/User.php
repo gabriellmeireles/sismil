@@ -20,7 +20,10 @@ class User extends Authenticatable
     protected $fillable = [
         'name',
         'email',
+        'cpf',
         'password',
+        'user_type_id',
+        'status'
     ];
 
     /**
@@ -41,4 +44,12 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function userType(){
+        return $this->belongsTo(UserType::class,'user_type_id','id');
+    }
+
+    public function admin(){
+        return $this->hasOne(Admin::class,'user_id','id');
+    }
 }
