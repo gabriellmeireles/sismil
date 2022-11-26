@@ -47,7 +47,7 @@ class Profile extends Component
 
     }
 
-    public function updateDetails(){
+    public function updateProfile(){
         User::where('id', auth('web')->id())->update([
             'name' => $this->name,
             'status' => $this->status,

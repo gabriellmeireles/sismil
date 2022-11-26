@@ -12,13 +12,6 @@ class ChangePassword extends Component
     public $current_password, $new_password, $confirm_new_password;
 
     protected $rules = [
-        'current_password' =>[
-            'required', function($attribute, $value, $fail){
-                if(!Hash::check($value, User::find(auth('web')->id())->password)){
-                    return $fail(__('A senha atual está incorreta'));
-                }
-            },
-        ],
         'new_password' => 'required|min:6|max:25',
         'confirm_new_password' => 'same:new_password'
     ];
@@ -28,7 +21,15 @@ class ChangePassword extends Component
     }
 
     public function updatePassword(){
-        $this->validate();
+        $this->validate([
+            'current_password' =>[
+                'required', function($attribute, $value, $fail){
+                    if(!Hash::check($value, User::find(auth('web')->id())->password)){
+                        return $fail(__('A senha atual está incorreta'));
+                    }
+                },
+            ],
+        ]);
 
         $query = User::find(auth('web')->id())->update([
             'password' => Hash::make($this->new_password)

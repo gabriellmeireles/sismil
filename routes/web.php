@@ -31,6 +31,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','prevent.back.h
     Route::get('dashboard',[AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('profile',[AdminController::class, 'profile'])->name('admin.profile');
     Route::get('settings',[AdminController::class, 'settings'])->name('admin.settings');
+    Route::view('user','admin.user')->name('user');
 });
 
 
