@@ -16,8 +16,8 @@ class RankDegreeSeeder extends Seeder
     public function run()
     {
         RankDegree::create([
-            'full_name' => 'Sistema',
-            'short_name' => 'SIS'
+            'full_name' => 'Master',
+            'short_name' => 'Master'
         ]);
     }
 }

@@ -8,7 +8,7 @@ use Illuminate\Support\Str;
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
  */
-class UserFactory extends Factory
+class AdminFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,14 +18,11 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'name' => fake()->name(),
-            'cpf' => fake()->isbn10(),
-            'status' => 1,
-            'user_type_id' => 7,
-            'email' => fake()->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-            'remember_token' => Str::random(10),
+            'war_name' => fake()->name(),
+            'rank_degree_id' => fake()->numberBetween(2,20),
+            'combat_arm_id' => fake()->numberBetween(2,25),
+            'section_id' => fake()->numberBetween(1,2),
+            'user_id' => fake()->unique()->numberBetween(2,20),
         ];
     }
 
