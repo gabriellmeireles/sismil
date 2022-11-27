@@ -21,7 +21,7 @@ Route::get('/', function () {
 });
 
 Route::middleware(['middleware'=>'prevent.back.history'])->group(function(){
-    Auth::routes();
+    Auth::routes(['verify' => true]);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

@@ -11,15 +11,15 @@
             <div>
 
                 @if (Session::get('error'))
-                <div class="alert alert-warning">
-                    {!! Session::get('error') !!}
-                </div>
+                    <div class="alert alert-warning">
+                        {!! Session::get('error') !!}
+                    </div>
                 @endif
 
                 @if (Session::get('success'))
-                <div class="alert alert-success">
-                    {!! Session::get('success') !!}
-                </div>
+                    <div class="alert alert-success">
+                        {!! Session::get('success') !!}
+                    </div>
                 @endif
 
                 <form class="card card-md" action="{{ route('password.update') }}" method="post" autocomplete="off">
@@ -56,7 +56,7 @@
                 </form>
             </div>
             <div class="text-center text-muted mt-3">
-                Voltar para a tela de <a href="{{route('register')}}" tabindex="-1">Login</a>
+                Voltar para a tela de <a href="{{route('login')}}" tabindex="-1">Login</a>
             </div>
         </div>
     </div>

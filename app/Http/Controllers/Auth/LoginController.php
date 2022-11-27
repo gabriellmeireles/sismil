@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    //protected $redirectTo = RouteServiceProvider::HOME;
     protected function redirectTo(){
         if (Auth()->user()->user_type_id == 7 ) {
             return route('user.dashboard');
