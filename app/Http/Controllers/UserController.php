@@ -8,16 +8,12 @@ class UserController extends Controller
 {
     public function index()
     {
-       return view('user.index');
+       return view('user.user.index');
     }
 
     public function profile()
     {
-       return view('user.profile');
+       return view('user.user.profile');
     }
 
-    public function settings()
-    {
-       return view('user.settings');
-    }
 }

@@ -19,6 +19,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/admin', function () {
+    return redirect()->route('admin.profile');
+});
+Route::get('/user', function () {
+    return redirect()->route('user.profile');
+});
+
+
 
 Route::middleware(['middleware'=>'prevent.back.history'])->group(function(){
     Auth::routes(['verify' => true]);
