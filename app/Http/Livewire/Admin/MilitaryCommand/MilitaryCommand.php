@@ -30,8 +30,6 @@ class MilitaryCommand extends Component
         $this->resetPage();
     }
 
-
-
     public function render()
     {
         return view('livewire.admin.military-command.military-command', [
