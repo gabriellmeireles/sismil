@@ -38,8 +38,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','prevent.back.history']],function(){
     Route::get('dashboard',[AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('profile',[AdminController::class, 'profile'])->name('admin.profile');
-    Route::get('settings',[AdminController::class, 'settings'])->name('admin.settings');
-    Route::view('user','admin.user')->name('user');
+    Route::view('user','admin.admin.user')->name('admin.user');
+    Route::view('instituicao-militar','admin.military-institution.index')->name('admin.instituicao-militar');
 });
 
 
