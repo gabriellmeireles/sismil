@@ -90,7 +90,7 @@ class AdminUser extends Component
                 $this->showEventMessage('Cadastrado com sucesso. Os dados de acesso foram enviados por email!', 'success');
                 $this->dispatchBrowserEvent('hideAddAdminModal');           
         } catch (\Illuminate\Database\QueryException $eQuery) {
-            $this->showEventMessage('Não foi possível cadastrar o Usuário. <br><strong>Exceção no Banco de Dados</strong>!', 'error');
+            $this->showEventMessage('Não foi possível cadastrar o Usuário. <br><strong>Exceção: Banco de Dados</strong>!', 'error');
         }
         if (empty($eQuery)) {
             try {
