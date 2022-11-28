@@ -39,7 +39,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','prevent.back.h
     Route::get('dashboard',[AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('profile',[AdminController::class, 'profile'])->name('admin.profile');
     Route::view('user','admin.admin.user')->name('admin.user');
-    Route::view('instituicao-militar','admin.military-institution.index')->name('admin.instituicao-militar');
+    Route::view('comando-militar','admin.military-command.index')->name('admin.military-command');
 });
 
 
