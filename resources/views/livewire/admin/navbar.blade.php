@@ -55,8 +55,11 @@
                   <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">
+                        <a class="dropdown-item" href="{{route('admin.user')}}" >
+                          Usuário
+                        </a>
                         <a class="dropdown-item" href="{{route('admin.military-command')}}" >
-                          Instituições Militares
+                          Comando Militar
                         </a>
                         <a class="dropdown-item" href="#" >
                           Região Militar

@@ -37,8 +37,8 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','prevent.back.history']],function(){
     Route::get('dashboard',[AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('profile',[AdminController::class, 'profile'])->name('admin.profile');
-    Route::view('user','admin.admin.user')->name('admin.user');
+    Route::get('perfil',[AdminController::class, 'profile'])->name('admin.profile');
+    Route::view('usuario','admin.admin.user')->name('admin.user');
     Route::view('comando-militar','admin.military-command.index')->name('admin.military-command');
 });
 
