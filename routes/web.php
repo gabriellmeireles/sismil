@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
+use App\Notifications\CreatedNewAdminMessage;
+use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
 Route::get('/admin', function () {
     return redirect()->route('admin.profile');
 });
@@ -35,15 +38,18 @@ Route::middleware(['middleware'=>'prevent.back.history'])->group(function(){
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
-Route::group(['prefix'=>'admin', 'middleware'=>['isAdmin','auth','prevent.back.history']],function(){
+Route::group(['prefix'=>'admin', 'middleware'=>['checkUserType:admin','auth','prevent.back.history']],function(){
     Route::get('dashboard',[AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('perfil',[AdminController::class, 'profile'])->name('admin.profile');
     Route::view('usuario','admin.admin.user')->name('admin.user');
     Route::view('comando-militar','admin.military-command.index')->name('admin.military-command');
+    Route::group(['middleware' => ['checkUserType:auditor']], function(){
+        //para futuras permições por tipo de usuário
+    });
 });
 
 
-Route::group(['prefix'=>'user', 'middleware'=>['isUser','auth','prevent.back.history']], function(){
+Route::group(['prefix'=>'user', 'middleware'=>['checkUserType:user','auth','prevent.back.history']], function(){
     Route::get('dashboard',[UserController::class, 'index'])->name('user.dashboard');
     Route::get('profile',[UserController::class, 'profile'])->name('user.profile');
     Route::get('settings',[UserController::class, 'settings'])->name('user.settings');

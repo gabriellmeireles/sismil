@@ -8,6 +8,7 @@ use App\Models\RankDegree;
 use App\Models\Section;
 use App\Models\User;
 use App\Models\UserType;
+use App\Notifications\CreatedNewAdminMessage;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -17,7 +18,6 @@ use Nette\Utils\Random;
 
 class AdminUser extends Component
 {
-
     use WithPagination;
 
     protected $paginationTheme = 'bootstrap';
@@ -66,13 +66,16 @@ class AdminUser extends Component
     public function create()
     {
         $this->validate();
+
+        $userPassword = Random::generate(6);
+
         DB::beginTransaction();
         try {
             $user = new User();
             $user->name = $this->name;
             $user->cpf = $this->cpf;
             $user->email = $this->email;
-            $user->password = Hash::make(Random::generate(6));
+            $user->password = Hash::make($userPassword);
             $user->user_type_id = $this->user_type;
             $user->save();
             
@@ -94,22 +97,14 @@ class AdminUser extends Component
         }
         if (empty($eQuery)) {
             try {
-                $emailData = array(
-                    'name' => $this->name,
-                    'cpf' => $this->cpf,
-                    'war_name' => $this->war_name,
-                    'rank_degree' => $this->rank_degree,
-                    'password' => $user->password,
-                    'user_type' => $this->user_type,
-                    'url' => route('admin.profile')
-                    );
-                    $admin_email = $this->email;
-                    $admin_name = $this->name;
-    
-                    Mail::send('layouts.emails.new-admin-email-template', $emailData, function($message) use ($admin_email, $admin_name){
-                        $message->from('no-reply@11rm.eb.mil.br','SISMIL');
-                        $message->to($admin_email, $admin_name)->subject('Criação de Conta');
-                    });
+                $newUserData = [
+                    'name' => $user->name,
+                    'cpf' => $user->cpf,
+                    'password' => $userPassword,
+                ];
+
+                $user->notify(new CreatedNewAdminMessage($newUserData));
+
             } catch (\Exception $eMail) {
                 $this->showEventMessage('Problema ao enviar os dados de acesso para o email do Usuário. <br><strong>Exceção: Servidor de Email!<strong>', 'error');
                 $this->dispatchBrowserEvent('hideAddAdminModal');

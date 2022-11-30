@@ -6,8 +6,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
-class isAdminMiddleware
+class CheckUserType
 {
     /**
      * Handle an incoming request.
@@ -18,28 +17,13 @@ class isAdminMiddleware
      */
     public function handle(Request $request, Closure $next, string $userType)
     {
-       /*  if (Auth::check()) {
-            if (Auth::user()->user_type_id != 7) {
-                return $next($request);
-            }else{
-                return redirect()->route('user.dashboard')->with('error','Acesso não permitido');
-            }
-        } else {
-            return redirect()->route('login');
-        } */
-
         $userTypes = [
             'admin' => [1,2,3,4,5,6],
             'user' => [7],
         ];
-        if (Auth::check()) {
-            if (!in_array(auth()->user()->user_type_id, $userTypes)) {
+            if (!in_array(auth()->user()->user_type_id, $userTypes[$userType])) {
                 abort(403);
             }
             return $next($request);
-        } else {
-            return redirect()->route('login');
-        }
-        
     }
 }

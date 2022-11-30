@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\CheckUserType;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -54,8 +55,9 @@ class Kernel extends HttpKernel
      */
     protected $routeMiddleware = [
         'auth' => \App\Http\Middleware\Authenticate::class,
-        'isAdmin' => \App\Http\Middleware\isAdminMiddleware::class,
-        'isUser' => \App\Http\Middleware\isUserMiddleware::class,
+        /* 'isAdmin' => \App\Http\Middleware\isAdminMiddleware::class,
+        'isUser' => \App\Http\Middleware\isUserMiddleware::class, */
+        'checkUserType' => CheckUserType::class,
         'prevent.back.history' => \App\Http\Middleware\PreventBackHistory::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'auth.session' => \Illuminate\Session\Middleware\AuthenticateSession::class,
