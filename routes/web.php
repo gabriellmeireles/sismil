@@ -43,6 +43,8 @@ Route::group(['prefix'=>'admin', 'middleware'=>['checkUserType:admin','auth','pr
     Route::get('perfil',[AdminController::class, 'profile'])->name('admin.profile');
     Route::view('usuario','admin.admin.user')->name('admin.user');
     Route::view('comando-militar','admin.military-command.index')->name('admin.military-command');
+    Route::view('regiao-militar','admin.military-region.index')->name('admin.military-region');
+    Route::view('organizacao-militar','admin.military-organization.index')->name('admin.military-organization');
     Route::group(['middleware' => ['checkUserType:auditor']], function(){
         //para futuras permições por tipo de usuário
     });
