@@ -76,6 +76,7 @@ class AdminUser extends Component
             $user->cpf = $this->cpf;
             $user->email = $this->email;
             $user->password = Hash::make($userPassword);
+            $user->email_verified_at = now();
             $user->user_type_id = $this->user_type;
             $user->save();
             

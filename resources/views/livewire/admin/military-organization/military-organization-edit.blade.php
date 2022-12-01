@@ -1,9 +1,9 @@
  {{-- EDIT MODAL --}}
- <div wire:ignore.self class="modal modal-blur fade" id="edit_rm-modal" tabindex="-1" role="dialog" aria-hidden="true">
+ <div wire:ignore.self class="modal modal-blur fade" id="edit_om-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Região Militar | Editar</h5>
+                <h5 class="modal-title">Organização Militar | Editar</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form wire:submit.prevent='update()' method="POST">
@@ -11,19 +11,19 @@
                     <input type="hidden" wire:model='rm_id'>
                     <div class="row">
                         <div class="col-lg-12">
-                            @if (!$cmas->isEmpty())
+                            @if (!$rms->isEmpty())
                                 <div class="mb-3">
-                                    <label class="form-label">Comando Militar de Área</label>
-                                    <select class="form-select @error('military_command'){{ 'is-invalid' }}@enderror" wire:model='military_command'>
+                                    <label class="form-label">Região Militar</label>
+                                    <select class="form-select @error('military_region'){{ 'is-invalid' }}@enderror" wire:model='military_region'>
                                         <option selected>....</option>
-                                        @foreach ($cmas as $cma)
-                                        <option value="{{ $cma->id }}">{{ $cma->full_name}}</option>
+                                        @foreach ($rms as $rm)
+                                        <option value="{{ $rm->id }}">{{ $rm->full_name}}</option>
                                         @endforeach
                                     </select> 
                                 </div>
                             @else
                                 <div class="mb-3">
-                                    <i>Nenhum <strong>Comando Militar de Área</strong> cadastrado, por favor <a href="{{route('admin.military-command')}}"><strong>cadastrar</strong></a> </i>
+                                    <i>Nenhuma <strong>Organização Militar</strong> cadastrada, por favor <a href="{{route('admin.military-region')}}"><strong>cadastrar</strong></a> </i>
                                 </div>
                             @endif
                         </div>

@@ -64,7 +64,7 @@
                         <a class="dropdown-item" href="{{route('admin.military-region')}}" >
                           Região Militar
                         </a>
-                        <a class="dropdown-item" href="#" >
+                        <a class="dropdown-item" href="{{route('admin.military-organization')}}" >
                           Organização Militar
                         </a>
                       </div>

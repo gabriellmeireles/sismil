@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Livewire\Admin\MilitaryRegion;
+namespace App\Http\Livewire\Admin\MilitaryOrganization;
 
-use App\Models\MilitaryCommand;
-use App\Models\MilitaryRegion as ModelsMilitaryRegion;
+use App\Models\MilitaryOrganization as ModelsMilitaryOrganization;
+use App\Models\MilitaryRegion;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-class MilitaryRegion extends Component
+class MilitaryOrganization extends Component
 {
 
     /**
@@ -15,7 +15,7 @@ class MilitaryRegion extends Component
      * DataTable config
      */
 
-    public $full_name, $short_name, $status, $military_command;
+    public $full_name, $short_name, $status, $military_region;
 
     use WithPagination;
 
@@ -37,7 +37,7 @@ class MilitaryRegion extends Component
     protected $rules = [
         'full_name' => 'required|string',
         'short_name' => 'required|string',
-        'military_command' => 'required',
+        'military_region' => 'required',
     ];
 
     public function updated($fields)
@@ -51,7 +51,7 @@ class MilitaryRegion extends Component
 
     public function resetForm()
     {
-        $this->full_name = $this->short_name = $this->status = $this->military_command = null;
+        $this->full_name = $this->short_name = $this->status = $this->military_region = null;
         $this->resetErrorBag();
     }
 
@@ -59,81 +59,81 @@ class MilitaryRegion extends Component
     {
         $this->validate();
         try {
-            $rm = new ModelsMilitaryRegion();
-            $rm->full_name = $this->full_name;
-            $rm->short_name = $this->short_name;
-            $rm->status = 1;
-            $rm->military_command_id = $this->military_command;
-            $rm->save();
+            $om = new ModelsMilitaryOrganization();
+            $om->full_name = $this->full_name;
+            $om->short_name = $this->short_name;
+            $om->status = 1;
+            $om->military_region_id = $this->military_region;
+            $om->save();
 
             $this->showEventMessage('Cadastrado realizado com sucesso.', 'success');
-            $this->dispatchBrowserEvent('hideAddRmModal');
+            $this->dispatchBrowserEvent('hideAddOmModal');
         } catch (\Illuminate\Database\QueryException $eQuery) {
             $this->showEventMessage('Não foi possível realizar o cadastrar. <br><strong>Exceção: Banco de Dados</strong>!', 'error');
         }
     }
 
-    public function edit($rm)
+    public function edit($om)
     {
-        $this->rm_id = $rm['id'];
-        $this->full_name = $rm['full_name'];
-        $this->short_name = $rm['short_name'];
-        $this->military_command = $rm['military_command_id'];
-        $this->status = $rm['status'];
+        $this->om_id = $om['id'];
+        $this->full_name = $om['full_name'];
+        $this->short_name = $om['short_name'];
+        $this->military_region = $om['military_region_id'];
+        $this->status = $om['status'];
 
-        $this->dispatchBrowserEvent('showEditRmModal');
+        $this->dispatchBrowserEvent('showEditOmModal');
     }
 
     public function update()
     {
         $this->validate();
         try {
-            $rm = ModelsMilitaryRegion::find($this->rm_id);
-            $rm->full_name = $this->full_name;
-            $rm->short_name = $this->short_name;
-            $rm->status = $this->status;
-            $rm->military_command_id = $this->military_command;
-            $rm->save();
+            $om = ModelsMilitaryOrganization::find($this->om_id);
+            $om->full_name = $this->full_name;
+            $om->short_name = $this->short_name;
+            $om->status = $this->status;
+            $om->military_region_id = $this->military_region;
+            $om->save();
 
             $this->showEventMessage('Alteração realizada com sucesso.','success');
-            $this->dispatchBrowserEvent('hideEditRmModal');
+            $this->dispatchBrowserEvent('hideEditOmModal');
         } catch (\Illuminate\Database\QueryException $eQuery) {
             $this->showEventMessage('Não foi possível realizar a alteração. <br><strong>Exceção: Banco de Dados</strong>!', 'error');
-            $this->dispatchBrowserEvent('hideEditRmModal');
+            $this->dispatchBrowserEvent('hideEditOmModal');
        }
     }
 
-    public function delete($rm)
+    public function delete($om)
     {
-        $this->rm_id = $rm['id'];
-        $this->full_name = $rm['full_name'];
+        $this->om_id = $om['id'];
+        $this->full_name = $om['full_name'];
 
-        $this->dispatchBrowserEvent('showDeleteRmModal');
+        $this->dispatchBrowserEvent('showDeleteOmModal');
     }
 
     public function destroy()
     {
         try {
-            $rm = ModelsMilitaryRegion::find($this->rm_id);
-            $rm->update([
+            $om = ModelsMilitaryOrganization::find($this->om_id);
+            $om->update([
                 'status' => 0,
             ]);
 
             $this->showEventMessage('Desativação realizada com sucesso', 'success');
-            $this->dispatchBrowserEvent('hideDeleteRmModal');
+            $this->dispatchBrowserEvent('hideDeleteOmModal');
         } catch (\Illuminate\Database\QueryException $eQuery) {
             $this->showEventMessage('Problema ao desativar o usuário <br><strong>Exceção Bando de Dados!<strong>' ,'error');
-            $this->dispatchBrowserEvent('hideDeleteRmModal');
+            $this->dispatchBrowserEvent('hideDeleteOmModal');
         }
     }
     
     public function render()
     {
-        return view('livewire.admin.military-region.military-region', [
-            'rms' => ModelsMilitaryRegion::where($this->search_input, 'like', '%'.$this->search.'%')
+        return view('livewire.admin.military-organization.military-organization', [
+            'oms' => ModelsMilitaryOrganization::where($this->search_input, 'like', '%'.$this->search.'%')
                                         ->orderBy('id')
                                         ->paginate($this->per_page),
-            'cmas' => MilitaryCommand::where('status', '=', 1)->get(),
+            'rms' => MilitaryRegion::where('status', '=', 1)->get(),
         ]);
     }
 
