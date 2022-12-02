@@ -69,7 +69,7 @@
                         </a>
                       </div>
                       <div class="dropdown-menu-column">
-                        <a class="dropdown-item" href="./navigation.html" >
+                        <a class="dropdown-item" href="{{ route('admin.state') }}" >
                           Estado
                         </a>
                         <a class="dropdown-item" href="./navigation.html" >

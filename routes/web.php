@@ -2,8 +2,6 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
-use App\Notifications\CreatedNewAdminMessage;
-use Illuminate\Notifications\Notification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -45,6 +43,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['checkUserType:admin','auth','pr
     Route::view('comando-militar','admin.military-command.index')->name('admin.military-command');
     Route::view('regiao-militar','admin.military-region.index')->name('admin.military-region');
     Route::view('organizacao-militar','admin.military-organization.index')->name('admin.military-organization');
+    Route::view('estado','admin.state.index')->name('admin.state');
     Route::group(['middleware' => ['checkUserType:auditor']], function(){
         //para futuras permições por tipo de usuário
     });
