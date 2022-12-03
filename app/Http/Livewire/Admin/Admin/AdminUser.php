@@ -221,6 +221,7 @@ class AdminUser extends Component
                                     /* ->join('sections', 'sections.id', '=', 'admins.section_id')
                                     ->join('combat_arms', 'combat_arms.id', '=', 'admins.combat_arm_id')
                                     ->join('rank_degrees', 'rank_degrees.id', '=', 'admins.rank_degree_id') */
+                                    ->where('user_type_id', '!=', 7)
                                     ->where($this->search_input, 'like', '%'.$this->search.'%')
                                     ->orderBy('admins.id')
                                     ->paginate($this->per_page),
