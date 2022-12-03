@@ -20,7 +20,6 @@
             </div>
         </div>
     </div>
-
     <div class="col-12">
         <div class="card">
             <div class="card-body border-bottom py-3">
@@ -115,3 +114,4 @@
     @include('livewire.admin.military-organization.military-organization-create')
     @include('livewire.admin.military-organization.military-organization-edit')
     @include('livewire.admin.military-organization.military-organization-disable')
+</div>
