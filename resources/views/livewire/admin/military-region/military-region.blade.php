@@ -66,6 +66,7 @@
                                     <th>ID</th>
                                     <th>Nome</th>
                                     <th>Sigla</th>
+                                    <th>Comando Militar</th>
                                     <th>Criado em</th>
                                     <th>Editado em</th>
                                     <th>Status</th>
@@ -80,6 +81,7 @@
                                     <td class="text-muted">{{ $rm->id }}</td>
                                     <td>{{ $rm->full_name }}</td>
                                     <td>{{ $rm->short_name}}</td>
+                                    <td>{{ $rm->militaryCommand->short_name}}</td>
                                     <td>{{ $rm->created_at->format('j M Y, h:i:s')}}</td>
                                     <td>{{ $rm->updated_at->format('j M Y, h:i:s')}}</td>
                                     <td>
