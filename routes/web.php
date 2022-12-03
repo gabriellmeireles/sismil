@@ -44,6 +44,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['checkUserType:admin','auth','pr
     Route::view('regiao-militar','admin.military-region.index')->name('admin.military-region');
     Route::view('organizacao-militar','admin.military-organization.index')->name('admin.military-organization');
     Route::view('estado','admin.state.index')->name('admin.state');
+    Route::view('cidade', 'admin.city.index')->name('admin.city');
     Route::group(['middleware' => ['checkUserType:auditor']], function(){
         //para futuras permições por tipo de usuário
     });

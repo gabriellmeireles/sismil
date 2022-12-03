@@ -72,7 +72,7 @@
                         <a class="dropdown-item" href="{{ route('admin.state') }}" >
                           Estado
                         </a>
-                        <a class="dropdown-item" href="./navigation.html" >
+                        <a class="dropdown-item" href="{{ route('admin.city') }}" >
                           Cidade
                         </a>
     
