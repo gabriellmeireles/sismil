@@ -16,7 +16,7 @@
             <div class="nav-item dropdown">
               <a href="#" class="nav-link d-flex lh-1 text-reset p-0" data-bs-toggle="dropdown" aria-label="Open user menu">
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><circle cx="12" cy="12" r="9" /><circle cx="12" cy="10" r="3" /><path d="M6.168 18.849a4 4 0 0 1 3.832 -2.849h4a4 4 0 0 1 3.834 2.855" /></svg>
-                
+
                 <div class="d-none d-xl-block ps-2">
                   <div>{{ $admin->name }}</div>
                   <div class="mt-1 small text-muted">{{ $admin->UserType->name }}</div>
@@ -75,7 +75,7 @@
                         <a class="dropdown-item" href="{{ route('admin.city') }}" >
                           Cidade
                         </a>
-    
+
                         <div class="dropend">
                           <a class="dropdown-item dropdown-toggle" href="#sidebar-authentication" data-bs-toggle="dropdown" data-bs-auto-close="outside" role="button" aria-expanded="false" >
                             Authentication
@@ -160,11 +160,11 @@
                   <div class="dropdown-menu">
                     <div class="dropdown-menu-columns">
                       <div class="dropdown-menu-column">
-                        <a class="dropdown-item" href="#" >
-                          Geral
+                        <a class="dropdown-item" href="{{ route('admin.contest-category') }}" >
+                        Categoria
                         </a>
                         <a class="dropdown-item" href="#" >
-                          Categoria
+                          Geral
                         </a>
                         <a class="dropdown-item" href="#" >
                           Edital
