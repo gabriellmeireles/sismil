@@ -41,7 +41,8 @@
                         Campo da Pesquisa
                         <div class="mx-2 d-inline-block">
                             <select wire:model="search_input">
-                                <option value="full_name" selected>Nome</option>
+                                <option value="cities.full_name" selected>Nome</option>
+                                <option value="states.short_name">Estado</option>
                             </select>
                         </div>
                     </div>
@@ -75,7 +76,7 @@
                                 <tr>
                                     <td class="text-muted">{{ $city->id }}</td>
                                     <td>{{ $city->full_name }}</td>
-                                    <td>{{ $city->state->short_name }}</td>
+                                    <td>{{ $city->short_name }}</td>
                                     <td>{{ $city->created_at->format('j M Y, h:i:s')}}</td>
                                     <td>{{ $city->updated_at->format('j M Y, h:i:s')}}</td>
                                     <td>

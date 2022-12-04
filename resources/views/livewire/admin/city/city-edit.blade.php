@@ -8,7 +8,7 @@
             </div>
             <form wire:submit.prevent='update()' method="POST">
                 <div class="modal-body">
-                    <input type="hidden" wire:model='state_id'>
+                    <input type="hidden" wire:model='city_id'>
                     <div class="row">
                         <div class="col-lg-12">
                             @if (!$states->isEmpty())

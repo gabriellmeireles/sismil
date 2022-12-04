@@ -16,7 +16,7 @@ class City extends Component
     protected $paginationTheme = 'bootstrap';
     public $search = '';
     public $per_page = 10;
-    public $search_input = 'full_name';
+    public $search_input = 'cities.full_name';
 
     public function updatingPerPage()
     {
@@ -93,10 +93,10 @@ class City extends Component
        }
     }
 
-    public function delete($state)
+    public function delete($city)
     {
-        $this->state_id = $state['id'];
-        $this->full_name = $state['full_name'];
+        $this->city_id = $city['id'];
+        $this->full_name = $city['full_name'];
 
         $this->dispatchBrowserEvent('showDeleteCityModal');
     }
@@ -120,8 +120,10 @@ class City extends Component
     public function render()
     {
         return view('livewire.admin.city.city',[
-            'cities' => ModelsCity::where($this->search_input, 'like', '%'.$this->search.'%')
-                                    ->orderBy('id')
+            'cities' => ModelsCity::select('cities.id','cities.full_name','cities.status','cities.created_at','cities.updated_at','cities.state_id','states.short_name')
+                                    ->where($this->search_input, 'like', '%'.$this->search.'%')
+                                    ->join('states','states.id', 'cities.state_id')
+                                    ->orderBy('cities.id')
                                     ->paginate($this->per_page),
             'states' => State::where('status', 1)->get(),    
         ]);
