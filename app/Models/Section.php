@@ -11,7 +11,8 @@ class Section extends Model
 
     protected $fillable = [
         'full_name',
-        'short_name'        
+        'short_name',
+        'status'       
     ];
 
     protected $dates = [

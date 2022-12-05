@@ -67,6 +67,9 @@
                         <a class="dropdown-item" href="{{route('admin.military-organization')}}" >
                           Organização Militar
                         </a>
+                        <a class="dropdown-item" href="{{route('admin.section')}}" >
+                          Seção
+                        </a>
                       </div>
                       <div class="dropdown-menu-column">
                         <a class="dropdown-item" href="{{ route('admin.state') }}" >
