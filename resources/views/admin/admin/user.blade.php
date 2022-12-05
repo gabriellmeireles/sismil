@@ -1,5 +1,5 @@
 @extends('layouts.pages')
-
+@section('page-title', 'Militares - '. config('app.name'))
 @section('content')
   @livewire('admin.admin.admin-user')
 @endsection

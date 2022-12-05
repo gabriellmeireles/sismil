@@ -1,4 +1,5 @@
 @extends('layouts.pages')
+@section('page-title', 'Dashboard - '. config('app.name'))
 
 @section('content')
     @if (session('status'))

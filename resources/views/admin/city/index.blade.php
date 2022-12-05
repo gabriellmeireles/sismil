@@ -1,4 +1,5 @@
 @extends('layouts.pages')
+@section('page-title', 'Cidade - '. config('app.name'))
 
 @section('content')
     @livewire('admin.city.city')

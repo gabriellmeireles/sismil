@@ -1,5 +1,5 @@
 @extends('layouts.pages')
-
+@section('page-title', 'Estado - '. config('app.name'))
 @section('content')
     @livewire('admin.state.state')
 @endsection

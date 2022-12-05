@@ -1,5 +1,5 @@
 @extends('layouts.pages')
-
+@section('page-title', 'Perfil - '. config('app.name'))
 @section('content')
 
 @livewire('admin.profile.profile-header')

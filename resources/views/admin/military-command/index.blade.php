@@ -1,5 +1,5 @@
 @extends('layouts.pages')
-
+@section('page-title', 'Comando Militar - '. config('app.name'))
 @section('content')
     @livewire('admin.military-command.military-command')
 @endsection

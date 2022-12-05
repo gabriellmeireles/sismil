@@ -4,8 +4,9 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>{{ config('app.name', 'SISMIL') }}</title>
-
+       {{--  <title>{{ config('app.name', 'SISMIL') }}</title> --}}
+        <title>@yield('page-title')</title>
+        
         <!-- CSS files -->
         <link href="{{ asset('dist/css/tabler.css') }}" rel="stylesheet" />
         <link href="{{ asset('dist/libs/ijabo/ijabo.min.css')}}" rel="stylesheet" />

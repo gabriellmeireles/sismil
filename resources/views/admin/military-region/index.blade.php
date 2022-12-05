@@ -1,5 +1,5 @@
 @extends('layouts.pages')
-
+@section('page-title', 'Região Militar - '. config('app.name'))
 @section('content')
     @livewire('admin.military-region.military-region')
 @endsection

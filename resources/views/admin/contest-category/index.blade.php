@@ -1,5 +1,5 @@
 @extends('layouts.pages')
-
+@section('page-title', 'Categoria - '. config('app.name'))
 @section('content')
     @livewire('admin.contest-category.contest-category')
 @endsection
