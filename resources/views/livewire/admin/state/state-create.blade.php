@@ -12,14 +12,14 @@
                         <div class="col-lg-8">
                             <div class="mb-3">
                                 <label class="form-label">Nome</label>
-                                <input type="text" attribute="Nome" class="form-control @error('full_name'){{ 'is-invalid' }}@enderror"  placeholder="Nome do Estado" wire:model='full_name'>
+                                <input type="text" attribute="Nome" class="form-control @error('full_name'){{ 'is-invalid' }}@enderror"  placeholder="Nome do Estado"  wire:model='full_name'>
                                 <span class="text-danger">@error('full_name'){{ $message }}@enderror</span>
                             </div>
                         </div>
                         <div class="col-lg-4">
                             <div class="mb-3">
                                 <label class="form-label">Sigla</label>
-                                <input type="text" class="form-control @error('short_name'){{ 'is-invalid' }}@enderror"  placeholder="Sigla" wire:model='short_name'>
+                                <input type="text" class="form-control text-uppercase @error('short_name'){{ 'is-invalid' }}@enderror" placeholder="Sigla" maxlength="2" wire:model='short_name'>
                                 <span class="text-danger">@error('short_name'){{ $message }}@enderror</span>
                             </div>
                         </div>

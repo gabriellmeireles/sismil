@@ -38,7 +38,7 @@
                         <div class="col-lg-4">
                             <div class="mb-3">
                                 <label class="form-label">Sigla</label>
-                                <input type="text" class="form-control @error('short_name'){{ 'is-invalid' }}@enderror"  placeholder="Sigla" wire:model='short_name'>
+                                <input type="text" class="form-control text-uppercase @error('short_name'){{ 'is-invalid' }}@enderror"  placeholder="Sigla" wire:model='short_name'>
                                 <span class="text-danger">@error('short_name'){{ $message }}@enderror</span>
                             </div>
                         </div>
