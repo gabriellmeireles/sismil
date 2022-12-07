@@ -18,6 +18,10 @@ class ContestSetting extends Model
         'max_age',
         'min_male_height',
         'min_female_height',
-        'status'
     ];
+
+    public function contestNotice()
+    {
+        return $this->hasOne(ContestNotice::class, 'contest_setting_id','id');
+    }
 }

@@ -18,12 +18,11 @@ return new class extends Migration
             $table->year('year');
             $table->dateTime('initial_inscription');
             $table->dateTime('final_inscription');
-            $table->dateTime('gru_expiration');
+            $table->dateTime('gru_expiration')->nullable()->default(NULL);
             $table->integer('min_age');
             $table->integer('max_age');
             $table->float('min_male_height');
             $table->float('min_female_height');
-            $table->tinyInteger('status');
             $table->timestamps();
         });
     }

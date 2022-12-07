@@ -166,11 +166,11 @@
                         <a class="dropdown-item" href="{{ route('admin.contest-category') }}" >
                         Categoria
                         </a>
-                        <a class="dropdown-item" href="#" >
-                          Geral
+                        <a class="dropdown-item" href="{{ route('admin.contest-notice') }}" >
+                          Edital
                         </a>
                         <a class="dropdown-item" href="#" >
-                          Edital
+                          Geral
                         </a>
                       </div>
                       <div class="dropdown-menu-column">
