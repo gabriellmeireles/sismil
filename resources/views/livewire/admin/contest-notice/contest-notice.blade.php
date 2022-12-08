@@ -122,3 +122,5 @@
         </div>
     </div>
 @include('livewire.admin.contest-notice.contest-notice-create')
+@include('livewire.admin.contest-notice.contest-notice-edit')
+@include('livewire.admin.contest-notice.contest-notice-disable')

@@ -1,12 +1,13 @@
 {{-- CREATE MODAL --}}
-<div wire:ignore.self class="modal modal-blur fade" id="create_contest_notice-modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div wire:ignore.self class="modal modal-blur fade" id="edit_contest_notice-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Edital | Cadastrar</h5>
+                <h5 class="modal-title">Edital | Editar</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form wire:submit.prevent='create()' method="POST">
+            <form wire:submit.prevent='update()' method="POST">
+                <input type="hidden" wire:model='contest_notice_id'>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-4">

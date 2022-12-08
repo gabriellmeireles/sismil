@@ -10,7 +10,7 @@ use Livewire\WithPagination;
 
 class ContestNotice extends Component
 {
-    public $name, $status, $contest_category, $contest_setting;
+    public $name, $status, $contest_category, $contest_setting, $short_name;
     public $year, $initial_inscription, $final_inscription, $gru_expiration, $min_age, $max_age, $min_male_height, $min_female_height;
 
     use WithPagination;
@@ -92,17 +92,97 @@ class ContestNotice extends Component
         }
     }
 
+    public function edit($contestNotice)
+    {
+        $this->year = $contestNotice['year'];
+        $this->initial_inscription = $contestNotice['initial_inscription'];
+        $this->final_inscription = $contestNotice['final_inscription'];
+        $this->gru_expiration = $contestNotice['gru_expiration'];
+        $this->min_age = $contestNotice['min_age'];
+        $this->max_age = $contestNotice['max_age'];
+        $this->min_male_height = $contestNotice['min_male_height'];
+        $this->min_female_height = $contestNotice['min_female_height'];
+
+        $this->short_name = $contestNotice['short_name'];
+
+        $this->contest_notice_id = $contestNotice['id'];
+        $this->name = $contestNotice['name'];
+        $this->status = $contestNotice['status'];
+        $this->contest_category = $contestNotice['contest_category_id'];
+        $this->contest_setting = $contestNotice['contest_setting_id'];
+
+        $this->dispatchBrowserEvent('showEditContestNoticeModal');
+    }
+
+    public function update()
+    {
+        $this->validate();
+        try {
+            $contestSetting = ModelsContestSetting::find($this->contest_setting);
+            $contestSetting->year = $this->year;
+            $contestSetting->initial_inscription = $this->initial_inscription;
+            $contestSetting->final_inscription = $this->final_inscription;
+            $contestSetting->gru_expiration = $this->gru_expiration;
+            $contestSetting->min_age = $this->min_age;
+            $contestSetting->max_age = $this->max_age;
+            $contestSetting->min_male_height = $this->min_male_height;
+            $contestSetting->min_female_height = $this->min_female_height;
+            $contestSetting->save();
+
+            $contestNotice = ModelsContestNotice::find($this->contest_notice_id);
+            $contestNotice->name = $this->name;
+            $contestNotice->status = $this->status;
+            $contestNotice->contest_category_id = $this->contest_category;
+            $contestNotice->save();
+
+
+
+            $this->showEventMessage('Alteração realizada com sucesso.','success');
+            $this->dispatchBrowserEvent('hideEditContestNoticeModal');
+        } catch (\Illuminate\Database\QueryException $eQuery) {
+            $this->showEventMessage('Não foi possível realizar a alteração. <br><strong>Exceção: Banco de Dados</strong>!', 'error');
+            $this->dispatchBrowserEvent('hideEditContestNoticeModal');
+       }
+    }
+
+    public function delete($contestNotice)
+    {
+        $this->contest_notice_id = $contestNotice['id'];
+        $this->name = $contestNotice['name'];
+        $this->year = $contestNotice['year'];
+        $this->short_name = $contestNotice['short_name'];
+
+        $this->dispatchBrowserEvent('showDeleteContestNoticeModal');
+    }
+
+    public function destroy()
+    {
+        try {
+            $cma = ModelsContestNotice::find($this->contest_notice_id);
+            $cma->update([
+                'status' => 0,
+            ]);
+
+            $this->showEventMessage('Desativação realizada com sucesso', 'success');
+            $this->dispatchBrowserEvent('hideDeleteCmaModal');
+        } catch (\Illuminate\Database\QueryException $eQuery) {
+            $this->showEventMessage('Problema ao desativar o usuário <br><strong>Exceção Bando de Dados!<strong>' ,'error');
+            $this->dispatchBrowserEvent('hideDeleteCmaModal');
+        }
+    }
+
     public function render()
     {
         return view('livewire.admin.contest-notice.contest-notice',[
             'contestSettings' => ModelsContestSetting::all(),
             'contestCategories' => ModelsContestCategory::all(),
-            'contestNotices' => ModelsContestNotice::select('contest_notices.name',
+            'contestNotices' => ModelsContestNotice::select('contest_notices.id',
+                                                            'contest_notices.name',
                                                             'contest_notices.status',
                                                             'contest_notices.updated_at',
-                                                            'contest_categories.id',
+                                                            'contest_notices.contest_category_id',
+                                                            'contest_notices.contest_setting_id',
                                                             'contest_categories.short_name',
-                                                            'contest_settings.id',
                                                             'contest_settings.year',
                                                             'contest_settings.initial_inscription',
                                                             'contest_settings.final_inscription',
