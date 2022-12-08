@@ -72,7 +72,6 @@
                                     <th>Data GRU</th>
                                     <th>Idade Min-Max</th>
                                     <th>Alturas Min</th>
-                                    <th>Criado em</th>
                                     <th>Editado em</th>
                                     <th>Status</th>
                                     <th>Opções</th>
@@ -86,13 +85,12 @@
                                     <td class="text-muted">{{ $contestNotice->id }}</td>
                                     <td>{{ $contestNotice->name }}</td>
                                     <td>{{ $contestNotice->short_name}}</td>
-                                    <td>{{ $contestNotice->initial_inscription->format('j M Y, h:i:s') }} - {{ $contestNotice->final_inscription->format('j M Y, h:i:s') }}</td>
-                                    <td>{{ $contestNotice->gru_expiration->format('j M Y')}}</td>
+                                    <td>{{ $contestNotice->year}}</td>
+                                    <td>{{ date('d/m/Y h:i:s', strtotime($contestNotice->initial_inscription)) }}<br>{{ date('d/m/Y h:i:s', strtotime($contestNotice->final_inscription)) }}</td>
+                                    <td>{{ date('d/m/Y', strtotime($contestNotice->gru_expiration))}}</td>
                                     <td>{{ $contestNotice->min_age }} - {{ $contestNotice->max_age }}</td>
                                     <td>{{ $contestNotice->min_male_height }} - {{ $contestNotice->min_female_height }}</td>
-                                    <td>{{ $contestNotice->year}}</td>
-                                    <td>{{ $contestNotice->created_at->format('j M Y, h:i:s')}}</td>
-                                    <td>{{ $contestNotice->updated_at->format('j M Y, h:i:s')}}</td>
+                                    <td>{{ date('d/m/Y h:i:s', strtotime($contestNotice->updated_at))}}</td>
                                     <td>
                                         {!! ($contestNotice->status == 0 ) ? "<span class='p-2 badge bg-orange-lt'>Inativo</span>"
                                         : "<span class='p-2 badge bg-green-lt'>Ativo</span>" !!}

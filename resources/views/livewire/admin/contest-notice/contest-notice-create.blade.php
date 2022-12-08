@@ -39,7 +39,7 @@
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Ano de Seleção</label>
-                                <input type="year" class="form-control @error('year'){{ 'is-invalid' }}@enderror" name="year"
+                                <input type="number" min="2020" class="form-control @error('year'){{ 'is-invalid' }}@enderror" name="year"
                                     placeholder="Ano do Edital" wire:model='year'>
                                 <span class="invalid-feedback"> @error('year') {{ $message }} @enderror</span>
                             </div>
@@ -63,9 +63,9 @@
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Vencimento GRU</label>
-                                <input type="date" class="form-control @error('gru_date'){{ 'is-invalid' }}@enderror" name="gru_date"
-                                    placeholder="Vencimeto GRU" wire:model='gru_date'>
-                                <span class="invalid-feedback"> @error('gru_date') {{ $message }} @enderror</span>
+                                <input type="date" class="form-control @error('gru_expiration'){{ 'is-invalid' }}@enderror" name="gru_expiration"
+                                    placeholder="Vencimeto GRU" wire:model='gru_expiration'>
+                                <span class="invalid-feedback"> @error('gru_expiration') {{ $message }} @enderror</span>
                             </div>
                         </div>
                     </div>
