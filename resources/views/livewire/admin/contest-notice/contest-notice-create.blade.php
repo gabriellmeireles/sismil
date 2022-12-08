@@ -19,6 +19,7 @@
                                         <option value="{{ $contestCategory->id }}">{{ $contestCategory->short_name}}</option>
                                         @endforeach
                                     </select>
+                                    <span class="invalid-feedback"> @error('contest_category') {{ $message }} @enderror</span>
                                 </div>
                             @else
                                 <div class="mb-3">
@@ -92,7 +93,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Maculino | Altura Mínima</label>
                                 <input type="text" class="form-control @error('min_male_height'){{ 'is-invalid' }}@enderror" name="min_male_height"
-                                    placeholder="Ex: 1.65" wire:model='min_male_height' data-mask="0.00" title="Ex: 1.65">
+                                    placeholder="Ex: 1.65" wire:model='min_male_height' title="Ex: 1.65">
                                 <span class="invalid-feedback"> @error('min_male_height') {{ $message }} @enderror</span>
                             </div>
                         </div>
@@ -100,7 +101,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Feminino | Altura Mínima</label>
                                 <input type="text" class="form-control @error('min_female_height'){{ 'is-invalid' }}@enderror" name="min_female_height"
-                                    placeholder="Ex: 1.55" wire:model='min_female_height' data-mask="0.00" title="Ex: 1.55">
+                                    placeholder="Ex: 1.55" wire:model='min_female_height' title="Ex: 1.55">
                                 <span class="invalid-feedback"> @error('min_female_height') {{ $message }} @enderror</span>
                             </div>
                         </div>
@@ -109,10 +110,11 @@
                         <div class="col-md-3">
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
-                                <select class="form-select" name="status" wire:model='status'>
+                                <select class="form-select @error('status'){{ 'is-invalid' }}@enderror" name="status" wire:model='status'>
                                     <option value="1">Ativo</option>
                                     <option value="0">Inativo</option>
                                 </select>
+                                <span class="invalid-feedback"> @error('status') {{ $message }} @enderror</span>
                             </div>
                         </div>
                     </div>

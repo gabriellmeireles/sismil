@@ -64,6 +64,7 @@ class ContestNotice extends Component
     {
 
         $this->validate();
+
         try {
             $contestSetting = new ModelsContestSetting();
             $contestSetting->year = $this->year;
