@@ -11,6 +11,7 @@ class ContestArea extends Model
 
     protected $fillable = [
         'name',
+        'status',
         'city_id',
         'contest_notice_id'
     ] ;
@@ -25,8 +26,8 @@ class ContestArea extends Model
         return $this->belongsTo(ContestNotice::class, 'contest_notice_id', 'id');
     }
 
-    public function contestAreaRequirements()
+    public function areaRequirements()
     {
-        return $this->hasMany(ContestAreaRequirement::class, 'contest_area_id', 'id');
+        return $this->belongsToMany(AreaRequirement::class);
     }
 }

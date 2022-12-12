@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('contest_area_requirements', function (Blueprint $table) {
+        Schema::create('area_requirements', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->tinyInteger('status');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contest_area_requirements');
+        Schema::dropIfExists('area_requirements');
     }
 };

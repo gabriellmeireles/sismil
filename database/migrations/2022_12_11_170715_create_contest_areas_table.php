@@ -15,6 +15,10 @@ return new class extends Migration
     {
         Schema::create('contest_areas', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->tinyInteger('status');
+            $table->foreignId('city_id')->constrained('cities', 'id');
+            $table->foreignId('contest_notice_id')->constrained('contest_notices', 'id');
             $table->timestamps();
         });
     }

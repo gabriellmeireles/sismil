@@ -169,8 +169,11 @@
                         <a class="dropdown-item" href="{{ route('admin.contest-notice') }}" >
                           Edital
                         </a>
-                        <a class="dropdown-item" href="#" >
-                          Geral
+                        <a class="dropdown-item" href="{{ route('admin.area-requirement') }}" >
+                          Exigências da Áreas
+                        </a>
+                        <a class="dropdown-item" href="{{ route('admin.contest-area') }}" >
+                          Áreas
                         </a>
                       </div>
                       <div class="dropdown-menu-column">

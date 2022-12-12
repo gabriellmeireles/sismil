@@ -13,8 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('contest_area_requirement_types', function (Blueprint $table) {
+        Schema::create('area_requirement_contest_area', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('contest_area_id')->constrained('contest_areas', 'id');
+            $table->foreignId('contest_area_requirement_type_id')->constrained('contest_area_requirement_types', 'id');
             $table->timestamps();
         });
     }
@@ -26,6 +28,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('contest_area_requirement_types');
+        Schema::dropIfExists('area_requirement_contest_area');
     }
 };
