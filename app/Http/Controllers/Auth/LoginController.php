@@ -48,7 +48,7 @@ class LoginController extends Controller
             'cpf' => 'required|max:11',
             'password' => 'required'
         ]);
-        $returnUrl = $request->session()->get('url')['intended'];
+        $returnUrl = (isset($request->session()->get('url')['intended'])) ? $request->session()->get('url')['intended'] : null;
         if (auth()->attempt(array('cpf'=>$input['cpf'], 'password'=>$input['password']))) {
             if (auth()->user()->user_type_id == 7) {
                 if ($returnUrl != null) {
