@@ -170,7 +170,7 @@
                           Edital
                         </a>
                         <a class="dropdown-item" href="{{ route('admin.area-requirement') }}" >
-                          Exigências da Áreas
+                          Exigências da Área
                         </a>
                         <a class="dropdown-item" href="{{ route('admin.contest-area') }}" >
                           Áreas

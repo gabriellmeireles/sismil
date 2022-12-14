@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('area_requirement_contest_area', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('area_requirement_id')->constrained('area_requirements', 'id');
             $table->foreignId('contest_area_id')->constrained('contest_areas', 'id');
-            $table->foreignId('contest_area_requirement_type_id')->constrained('contest_area_requirement_types', 'id');
             $table->timestamps();
         });
     }

@@ -1,5 +1,5 @@
 @extends('layouts.pages')
-@section('page-title', 'Exigências das Áreas - '. config('app.name'))
+@section('page-title', 'Exigências das Área - '. config('app.name'))
 
 @section('content')
     @livewire('admin.area-requirement.area-requirement')
