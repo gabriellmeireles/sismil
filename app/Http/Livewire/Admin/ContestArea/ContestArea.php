@@ -3,21 +3,20 @@
 namespace App\Http\Livewire\Admin\ContestArea;
 
 use App\Models\ContestArea as ModelsContestArea;
-use App\Models\ContestAreaRequirement as ModelsContestAreaRequirement;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class ContestArea extends Component
 {
     public $name, $status, $city_id, $contest_notice_id;
-    public $contest_area_id, $contest_area_requirement_type_id;
+    public $contest_area_id, $area_requirement_id;
 
     use WithPagination;
 
     protected $paginationTheme = 'bootstrap';
     public $search = '';
     public $per_page = 10;
-    public $search_input = 'cities.full_name';
+    public $search_input = 'contest_areas.name';
 
     public function updatingPerPage()
     {
@@ -31,11 +30,11 @@ class ContestArea extends Component
 
     protected $rules = [
         'name' => 'required|string',
+        'status' => 'required',
         'city_id' => 'required',
         'contest_notice_id' => 'required',
-        'status' => 'required',
         'contest_area_id' => 'required',
-        'contest_area_requirement_type_id' => 'required',
+        'area_requirement_id' => 'required',
     ];
 
     public function updated($fields)
@@ -49,7 +48,7 @@ class ContestArea extends Component
 
     public function resetForm()
     {
-        $this->full_name = $this->status = null;
+        $this->name = $this->status = $this->city_id = $this->contest_notice_id = null;
         $this->resetErrorBag();
     }
 
@@ -62,8 +61,10 @@ class ContestArea extends Component
             $contestArea->status = 1;
             $contestArea->city_id = $this->city_id;
             $contestArea->contest_notice_id = $this->contest_notice_id;
+            $contestArea->save();
+            $contestArea->areaRequirements()->attach($this->area_requirement_id);
 
-            $contestAreaId = $contestArea->id;
+            $areaRequirement_contest_area = new
 
             $this->showEventMessage('Cadastrado realizado com sucesso.', 'success');
             $this->dispatchBrowserEvent('hideAddContestAreaModal');
@@ -128,11 +129,24 @@ class ContestArea extends Component
 
     public function render()
     {
+
         return view('livewire.admin.contest-area.contest-area',[
-            $contestAreas = ModelsContestArea::all()
-                                                ->where($this->search_input, 'like', '%'.$this->search.'%')
-                                                ->orderBy('contest_notices.id')
-                                                ->paginate($this->per_page),
+            'contestAreas' => ModelsContestArea::select("cc.full_name AS category_name",
+                                                    "cn.name AS notice_name",
+                                                    "c.full_name AS city_name",
+                                                    "contest_areas.name AS area_name",
+                                                    "contest_areas.status",
+                                                    "arca.area_requirement_id",
+                                                    "arca.contest_area_id",
+                                                    "ar.name AS requirement_name")
+                                            ->join("contest_notices AS cn", 'cn.id', 'contest_areas.contest_notice_id')
+                                            ->join("contest_categories AS cc", 'cc.id', 'cn.contest_category_id')
+                                            ->join("cities AS c", 'c.id', 'contest_areas.city_id')
+                                            ->join("area_requirement_contest_area AS arca", 'arca.contest_area_id', 'contest_areas.id')
+                                            ->join("area_requirements AS ar", 'ar.id', 'arca.area_requirement_id')
+                                            ->where($this->search_input, 'like', '%'.$this->search.'%')
+                                            ->orderBy('contest_areas.id')
+                                            ->paginate($this->per_page),
         ]);
     }
 

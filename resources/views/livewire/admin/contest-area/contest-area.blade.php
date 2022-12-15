@@ -110,7 +110,7 @@
                         </table>
                     </div>
                     <div class="card-footer d-flex align-items-center justify-content-center">
-                        {{ $contestAreas->links() }}
+                      {{--   {{ $contestAreas->links() }} --}}
                     </div>
                 </div>
             </div>
