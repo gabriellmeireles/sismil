@@ -79,12 +79,12 @@
                             <tbody>
                                 @forelse ($contestAreas as $contestArea)
                                 <tr>
-                                    <td class="text-muted">{{ $contestArea->id }}</td>
-                                    <td>{{ $contestArea->name }}</td>
-                                    <td>{{ $contestArea->city }}</td>
-                                    <td>{{ $contestArea->state }}</td>
-                                    <td>{{ $contestArea->category }}</td>
-                                    <td>{{ $contestArea->notice }}</td>
+                                    <td class="text-muted">{{ $contestArea->contest_area_id }}</td>
+                                    <td>{{ $contestArea->area_name }}</td>
+                                    <td>{{ $contestArea->city_name }}</td>
+                                    <td>{{ $contestArea->state_name }}</td>
+                                    <td>{{ $contestArea->category_name }}</td>
+                                    <td>{{ $contestArea->notice_name }}</td>
                                     <td>{{ $contestArea->updated_at->format('j M Y, h:i:s')}}</td>
                                     <td>
                                         {!! ($contestArea->status == 0 ) ? "<span class='p-2 badge bg-orange-lt'>Inativo</span>"
@@ -116,6 +116,6 @@
             </div>
         </div>
     </div>
-  {{--   @include('livewire.admin.contest-area.contest-area-create')
-    @include('livewire.admin.contest-area.contest-area-edit')
+    @include('livewire.admin.contest-area.contest-area-create')
+    {{-- @include('livewire.admin.contest-area.contest-area-edit')
     @include('livewire.admin.contest-area.contest-area-disable') --}}

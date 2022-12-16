@@ -2,14 +2,17 @@
 
 namespace App\Http\Livewire\Admin\ContestArea;
 
+use App\Models\AreaRequirement;
+use App\Models\City;
 use App\Models\ContestArea as ModelsContestArea;
+use App\Models\ContestNotice;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class ContestArea extends Component
 {
     public $name, $status, $city_id, $contest_notice_id;
-    public $contest_area_id, $area_requirement_id;
+    public $contest_area_id, $area_requirement_id = [];
 
     use WithPagination;
 
@@ -30,10 +33,8 @@ class ContestArea extends Component
 
     protected $rules = [
         'name' => 'required|string',
-        'status' => 'required',
         'city_id' => 'required',
         'contest_notice_id' => 'required',
-        'contest_area_id' => 'required',
         'area_requirement_id' => 'required',
     ];
 
@@ -48,7 +49,7 @@ class ContestArea extends Component
 
     public function resetForm()
     {
-        $this->name = $this->status = $this->city_id = $this->contest_notice_id = null;
+        $this->name = $this->status = $this->city_id = $this->contest_notice_id = $this->area_requirement_id = null;
         $this->resetErrorBag();
     }
 
@@ -64,7 +65,7 @@ class ContestArea extends Component
             $contestArea->save();
             $contestArea->areaRequirements()->attach($this->area_requirement_id);
 
-            $areaRequirement_contest_area = new
+            /* $areaRequirement_contest_area = new */
 
             $this->showEventMessage('Cadastrado realizado com sucesso.', 'success');
             $this->dispatchBrowserEvent('hideAddContestAreaModal');
@@ -131,22 +132,29 @@ class ContestArea extends Component
     {
 
         return view('livewire.admin.contest-area.contest-area',[
-            'contestAreas' => ModelsContestArea::select("cc.full_name AS category_name",
+            'contestAreas' => ModelsContestArea::select("cc.short_name AS category_name",
                                                     "cn.name AS notice_name",
                                                     "c.full_name AS city_name",
+                                                    "s.short_name AS state_name",
                                                     "contest_areas.name AS area_name",
                                                     "contest_areas.status",
+                                                    "contest_areas.created_at",
+                                                    "contest_areas.updated_at",
                                                     "arca.area_requirement_id",
                                                     "arca.contest_area_id",
                                                     "ar.name AS requirement_name")
                                             ->join("contest_notices AS cn", 'cn.id', 'contest_areas.contest_notice_id')
                                             ->join("contest_categories AS cc", 'cc.id', 'cn.contest_category_id')
                                             ->join("cities AS c", 'c.id', 'contest_areas.city_id')
+                                            ->join("states AS s", 's.id', 'c.id')
                                             ->join("area_requirement_contest_area AS arca", 'arca.contest_area_id', 'contest_areas.id')
                                             ->join("area_requirements AS ar", 'ar.id', 'arca.area_requirement_id')
                                             ->where($this->search_input, 'like', '%'.$this->search.'%')
                                             ->orderBy('contest_areas.id')
                                             ->paginate($this->per_page),
+            'cities' => City::select('id','full_name')->where('status', 1)->get(),
+            'contestNotices' => ContestNotice::select('id','name')->where('status', 1)->get(),
+            'areaRequirements' => AreaRequirement::select('id', 'name')->where('status', 1)->get(),
         ]);
     }
 
