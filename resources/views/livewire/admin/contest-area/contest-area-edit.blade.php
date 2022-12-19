@@ -1,32 +1,32 @@
 {{-- CREATE MODAL --}}
-<div wire:ignore.self class="modal modal-blur fade" id="create_contest_area-modal" tabindex="-1" role="dialog" aria-hidden="true">
+<div wire:ignore.self class="modal modal-blur fade" id="edit_contest_area-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Área | Cadastrar</h5>
+                <h5 class="modal-title">Área | Editar</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form wire:submit.prevent='create()' method="POST">
+            <form wire:submit.prevent='edit()' method="POST">
                 <div class="modal-body">
                     <div class="row">
                         <div class="mb-3">
                             <div class="form-label">Categoria</div>
-                                @if (!$contestCategories->isEmpty())
-                                    <div>
-                                        @foreach ( $contestCategories as $contestCategory )
-                                            <label class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" value="{{ $contestCategory->id }}" name="contest_category_id" wire:model='contest_category_id'>
-                                            <span class="form-check-label">{{ $contestCategory->short_name}}</span>
-                                        </label>
-                                        @endforeach
-                                    </div>
-                                    <span class="text-danger">@error('contest_category_id'){{ $message }}@enderror</span>
-                                @else
-                                <div class="mb-3">
-                                    <i>Nenhuma <strong>Categoria</strong> cadastrada, por favor <a href="{{route('admin.contest-category')}}"><strong>cadastrar</strong></a> </i>
+                            @if (!$contestCategories->isEmpty())
+                                <div>
+                                    @foreach ( $contestCategories as $contestCategory )
+                                        <label class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" value="{{ $contestCategory->id }}" name="contest_category_id" wire:model='contest_category_id'>
+                                        <span class="form-check-label">{{ $contestCategory->short_name}}</span>
+                                    </label>
+                                    @endforeach
                                 </div>
-                                @endif
-                          </div>
+                                <span class="text-danger">@error('contest_category_id'){{ $message }}@enderror</span>
+                            @else
+                            <div class="mb-3">
+                                <i>Nenhuma <strong>Categoria</strong> cadastrada, por favor <a href="{{route('admin.contest-category')}}"><strong>cadastrar</strong></a> </i>
+                            </div>
+                            @endif
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-lg-6">
@@ -34,10 +34,13 @@
                                 <label class="form-label">Edital</label>
                                 <select class="form-select @error('contest_notice_id'){{ 'is-invalid' }}@enderror" wire:model='contest_notice_id'>
                                     <option selected>....</option>
-                                    @foreach ($contestNotices as $contestNotice)
-                                    <option value="{{ $contestNotice->id }}">{{ $contestNotice->name}}</option>
-                                    @endforeach
+                                    @if (!$contestNotices->isEmpty())
+                                        @foreach ($contestNotices as $contestNotice)
+                                            <option value="{{ $contestNotice->id }}">{{ $contestNotice->contestCategory->short_name }} - {{ $contestNotice->name}}</option>
+                                        @endforeach
+                                    @endif
                                 </select>
+                                <span class="text-danger">@error('contest_notice_id'){{ $message }}@enderror</span>
                             </div>
                         </div>
                         <div class="col-lg-6">
@@ -50,6 +53,7 @@
                                         <option value="{{ $city->id }}">{{ $city->full_name}}</option>
                                         @endforeach
                                     </select>
+                                    <span class="text-danger">@error('city_id'){{ $message }}@enderror</span>
                                 </div>
                             @else
                                 <div class="mb-3">
@@ -108,4 +112,3 @@
         </div>
     </div>
 </div>
-

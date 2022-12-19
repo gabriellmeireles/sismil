@@ -117,5 +117,5 @@
         </div>
     </div>
     @include('livewire.admin.contest-area.contest-area-create')
-   {{--  @include('livewire.admin.contest-area.contest-area-edit') --}}
+    @include('livewire.admin.contest-area.contest-area-edit')
     @include('livewire.admin.contest-area.contest-area-disable')
