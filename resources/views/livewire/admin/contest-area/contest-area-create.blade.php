@@ -9,22 +9,39 @@
             <form wire:submit.prevent='create()' method="POST">
                 <div class="modal-body">
                     <div class="row">
-                        <div class="col-lg-6">
-                            @if (!$contestNotices->isEmpty())
-                                <div class="mb-3">
-                                    <label class="form-label">Edital</label>
-                                    <select class="form-select @error('contest_notice_id'){{ 'is-invalid' }}@enderror" wire:model='contest_notice_id'>
-                                        <option selected>....</option>
-                                        @foreach ($contestNotices as $contestNotice)
-                                        <option value="{{ $contestNotice->id }}">{{ $contestNotice->name}}</option>
+                        <div class="mb-3">
+                            <div class="form-label">Categoria</div>
+                                @if (!$contestCategories->isEmpty())
+                                    <div>
+                                        @foreach ( $contestCategories as $contestCategory )
+                                            <label class="form-check form-check-inline">
+                                            <input class="form-check-input" type="radio" value="{{ $contestCategory->id }}" name="contest_category_id" wire:model='contest_category_id'>
+                                            <span class="form-check-label">{{ $contestCategory->short_name}}</span>
+                                        </label>
                                         @endforeach
-                                    </select>
-                                </div>
-                            @else
+                                    </div>
+                                    <span class="text-danger">@error('contest_category_id'){{ $message }}@enderror</span>
+                                @else
                                 <div class="mb-3">
-                                    <i>Nenhum <strong>Edital</strong> cadastrado, por favor <a href="{{route('admin.contest-notice')}}"><strong>cadastrar</strong></a> </i>
+                                    <i>Nenhuma <strong>Categoria</strong> cadastrada, por favor <a href="{{route('admin.contest-category')}}"><strong>cadastrar</strong></a> </i>
                                 </div>
-                            @endif
+                                @endif
+                          </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="mb-3">
+                                <label class="form-label">Edital</label>
+                                <select class="form-select @error('contest_notice_id'){{ 'is-invalid' }}@enderror" wire:model='contest_notice_id'>
+                                    <option selected>....</option>
+                                    @if (!$contestNotices->isEmpty())
+                                        @foreach ($contestNotices as $contestNotice)
+                                            <option value="{{ $contestNotice->id }}">{{ $contestNotice->contestCategory->short_name }} - {{ $contestNotice->name}}</option>
+                                        @endforeach
+                                    @endif
+                                </select>
+                                <span class="text-danger">@error('contest_notice_id'){{ $message }}@enderror</span>
+                            </div>
                         </div>
                         <div class="col-lg-6">
                             @if (!$cities->isEmpty())
@@ -36,6 +53,7 @@
                                         <option value="{{ $city->id }}">{{ $city->full_name}}</option>
                                         @endforeach
                                     </select>
+                                    <span class="text-danger">@error('city_id'){{ $message }}@enderror</span>
                                 </div>
                             @else
                                 <div class="mb-3">

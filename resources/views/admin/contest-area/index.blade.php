@@ -24,12 +24,12 @@
     });
 
 
-    window.addEventListener('showDeleteContestAreaModal', function(event){
-      $('#delete_contest_area-modal').modal('show');
+    window.addEventListener('showDeactivateContestAreaModal', function(event){
+      $('#deactivate_contest_area-modal').modal('show');
     });
 
-    window.addEventListener('hideDeleteContestAreaModal', function(event){
-      $('#delete_contest_area-modal').modal('hide');
+    window.addEventListener('hideDeactivateContestAreaModal', function(event){
+      $('#deactivate_contest_area-modal').modal('hide');
     });
 
   </script>

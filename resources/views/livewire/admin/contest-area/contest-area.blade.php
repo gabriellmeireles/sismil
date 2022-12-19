@@ -79,7 +79,7 @@
                             <tbody>
                                 @forelse ($contestAreas as $contestArea)
                                 <tr>
-                                    <td class="text-muted">{{ $contestArea->contest_area_id }}</td>
+                                    <td class="text-muted">{{ $contestArea->area_id }}</td>
                                     <td>{{ $contestArea->area_name }}</td>
                                     <td>{{ $contestArea->city_name }}</td>
                                     <td>{{ $contestArea->state_name }}</td>
@@ -94,7 +94,7 @@
                                         <a wire:click.prevent='edit({{ $contestArea }})'
                                             class="btn btn-outline-lime btn-sm">Editar</a>
 
-                                        <a wire:click.prevent='delete({{ $contestArea }})'
+                                        <a wire:click.prevent='deactivate({{ $contestArea }})'
                                             class="btn btn-outline-yellow btn-sm">Desativar</<a>
                                     </td>
                                 </tr>
@@ -117,5 +117,5 @@
         </div>
     </div>
     @include('livewire.admin.contest-area.contest-area-create')
-    {{-- @include('livewire.admin.contest-area.contest-area-edit')
-    @include('livewire.admin.contest-area.contest-area-disable') --}}
+   {{--  @include('livewire.admin.contest-area.contest-area-edit') --}}
+    @include('livewire.admin.contest-area.contest-area-disable')
