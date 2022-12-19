@@ -111,7 +111,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
                                 <select class="form-select" name="status" wire:model='status'>
-                                    <option value="1">Ativo</option>
+                                    <option value="1" selected>Ativo</option>
                                     <option value="0">Inativo</option>
                                 </select>
                             </div>
