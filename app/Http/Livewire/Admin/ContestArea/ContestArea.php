@@ -84,6 +84,14 @@ class ContestArea extends Component
         $this->city_id = $contestArea['city_id'];
         $this->name = $contestArea['area_name'];
         $this->status = $contestArea['status'];
+        $areaRequirementContestIds = AreaRequirementContestArea::select('area_requirement_id')->where('contest_area_id', $this->contest_area_id)->get();
+        foreach ($areaRequirementContestIds as $areaRequirementContestId) {
+            $this->area_requirement_id[] = $areaRequirementContestId->area_requirement_id;
+        }
+
+
+
+
 
 
         $this->dispatchBrowserEvent('showEditContestAreaModal');
