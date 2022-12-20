@@ -1,4 +1,4 @@
-{{-- CREATE MODAL --}}
+{{-- EDIT MODAL --}}
 <div wire:ignore.self class="modal modal-blur fade" id="edit_contest_area-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -6,8 +6,9 @@
                 <h5 class="modal-title">Área | Editar</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form wire:submit.prevent='edit()' method="POST">
+            <form wire:submit.prevent='update()' method="POST">
                 <div class="modal-body">
+                    <input type="hidden" wire:model='contest_area_id'>
                     <div class="row">
                         <div class="mb-3">
                             <div class="form-label">Categoria</div>
@@ -63,11 +64,21 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-lg-12">
+                        <div class="col-lg-8">
                             <div class="mb-3">
                                 <label class="form-label">Nome</label>
                                 <input type="text" attribute="Nome" class="form-control @error('name'){{ 'is-invalid' }}@enderror"  placeholder="Nome da Área" wire:model='name'>
                                 <span class="text-danger">@error('name'){{ $message }}@enderror</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="mb-3">
+                                <label class="form-label">Status</label>
+                                <select class="form-select @error('status'){{ 'is-invalid' }}@enderror" wire:model='status'>
+                                    <option value="1">Ativo</option>
+                                    <option value="0">Inativo</option>
+                                </select>
+                                <span class="text-danger">@error('status'){{ $message }}@enderror</span>
                             </div>
                         </div>
                     </div>
