@@ -177,7 +177,7 @@
                         </a>
                       </div>
                       <div class="dropdown-menu-column">
-                        <a class="dropdown-item" href="./navigation.html" >
+                        <a class="dropdown-item" href="{{ route('admin.candidate-type') }}" >
                           Tipo de Candidato
                         </a>
                         <a class="dropdown-item" href="./navigation.html" >
