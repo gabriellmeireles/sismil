@@ -16,7 +16,7 @@ class AdminSeeder extends Seeder
     public function run()
     {
         Admin::create([
-            'war_name' => 'Admin Sistema',
+            'war_name' => 'Sistema',
             'rank_degree_id' => 1,
             'combat_arm_id' => 1,
             'section_id' => 1,

@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Administrador do Sistema',
             'cpf' => '00000000000',
-            'email' => 'admin@sistema',
+            'email' => 'dev@11rm.eb.mil.br',
             'password' => Hash::make('123456'),
             'status' => 1,
             'user_type_id' => 1,

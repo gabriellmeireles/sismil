@@ -43,8 +43,8 @@ class UserTypeSeeder extends Seeder
             'id' => 7,
             'name' => 'Candidato',
         ]);
+        UserType::where('id', 7)->update(['id' => 0]);
 
-        
 
     }
 }

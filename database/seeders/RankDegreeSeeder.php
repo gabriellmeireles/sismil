@@ -16,8 +16,8 @@ class RankDegreeSeeder extends Seeder
     public function run()
     {
         RankDegree::create([
-            'full_name' => 'Master',
-            'short_name' => 'Master'
+            'full_name' => 'Administrador',
+            'short_name' => 'Admin'
         ]);
     }
 }
