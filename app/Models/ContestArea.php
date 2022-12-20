@@ -28,6 +28,6 @@ class ContestArea extends Model
 
     public function areaRequirements()
     {
-        return $this->belongsToMany(AreaRequirement::class);
+        return $this->belongsToMany(AreaRequirement::class)->withTimestamps()->using(AreaRequirementContestArea::class);
     }
 }
