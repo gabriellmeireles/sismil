@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\ContestArea;
 
 use App\Models\AreaRequirement;
+use App\Models\AreaRequirementContestArea;
 use App\Models\City;
 use App\Models\ContestArea as ModelsContestArea;
 use App\Models\ContestCategory;
@@ -50,7 +51,8 @@ class ContestArea extends Component
 
     public function resetForm()
     {
-        $this->name = $this->status = $this->city_id = $this->contest_notice_id = $this->area_requirement_id = $this->area_id = $this->contest_category_id = null;
+        $this->name = $this->status = $this->city_id = $this->contest_notice_id = $this->area_id = null;
+        $this->area_requirement_id = [];
         $this->resetErrorBag();
     }
 
@@ -64,7 +66,7 @@ class ContestArea extends Component
             $contestArea->contest_notice_id = $this->contest_notice_id;
             $contestArea->city_id = $this->city_id;
             $contestArea->save();
-            $contestArea->areaRequirements()->attach($this->area_requirement_id);
+            $contestArea->areaRequirements()->sync($this->area_requirement_id);
 
 
             $this->showEventMessage('Cadastrado realizado com sucesso.', 'success');
@@ -76,17 +78,13 @@ class ContestArea extends Component
 
     public function edit($contestArea)
     {
-
-        $areaRequirementContestArea = ModelsContestArea::first();
-
         $this->contest_area_id = $contestArea['area_id'];
         $this->contest_category_id = $contestArea['category_id'];
         $this->contest_notice_id = $contestArea['notice_id'];
         $this->city_id = $contestArea['city_id'];
         $this->name = $contestArea['area_name'];
         $this->status = $contestArea['status'];
-        $this->area_requirement_id = $areaRequirementContestArea->areaRequirements->pivot->created_at;
-        dd($this->area_requirement_id);
+
 
         $this->dispatchBrowserEvent('showEditContestAreaModal');
     }
@@ -159,7 +157,6 @@ class ContestArea extends Component
             'contestNotices' => ContestNotice::all()->where('status', 1)->where('contest_category_id', $this->contest_category_id),
             'cities' => City::select('id','full_name')->where('status', 1)->get(),
             'areaRequirements' => AreaRequirement::select('id', 'name')->where('status', 1)->get(),
-
         ]);
     }
 
