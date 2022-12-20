@@ -3,6 +3,7 @@
 namespace App\Http\Livewire\Admin\ContestArea;
 
 use App\Models\AreaRequirement;
+use App\Models\AreaRequirementContestArea;
 use App\Models\City;
 use App\Models\ContestArea as ModelsContestArea;
 use App\Models\ContestCategory;
@@ -50,7 +51,8 @@ class ContestArea extends Component
 
     public function resetForm()
     {
-        $this->name = $this->status = $this->city_id = $this->contest_notice_id = $this->area_requirement_id = $this->area_id = null;
+        $this->name = $this->status = $this->city_id = $this->contest_notice_id = $this->area_id = null;
+        $this->area_requirement_id = [];
         $this->resetErrorBag();
     }
 
@@ -64,9 +66,8 @@ class ContestArea extends Component
             $contestArea->contest_notice_id = $this->contest_notice_id;
             $contestArea->city_id = $this->city_id;
             $contestArea->save();
-            $contestArea->areaRequirements()->attach($this->area_requirement_id);
+            $contestArea->areaRequirements()->sync($this->area_requirement_id);
 
-            /* $areaRequirement_contest_area = new */
 
             $this->showEventMessage('Cadastrado realizado com sucesso.', 'success');
             $this->dispatchBrowserEvent('hideAddContestAreaModal');
@@ -77,12 +78,13 @@ class ContestArea extends Component
 
     public function edit($contestArea)
     {
-        $this->category_id = $contestArea['category_id'];
+        $this->contest_area_id = $contestArea['area_id'];
+        $this->contest_category_id = $contestArea['category_id'];
+        $this->contest_notice_id = $contestArea['notice_id'];
+        $this->city_id = $contestArea['city_id'];
         $this->name = $contestArea['area_name'];
         $this->status = $contestArea['status'];
-        $this->city_id = $contestArea['city_id'];
-        $this->contest_notice_id = $contestArea['notice_id'];
-        $this->contest_area_id = $contestArea['area_id'];
+
 
         $this->dispatchBrowserEvent('showEditContestAreaModal');
     }
@@ -136,23 +138,18 @@ class ContestArea extends Component
             'contestAreas' => ModelsContestArea::select("contest_areas.id AS area_id",
                                                     "contest_categories.id AS category_id",
                                                     "contest_categories.short_name AS category_name",
-                                                    "contest_notices.name AS notice_name",
                                                     "contest_notices.id AS notice_id",
+                                                    "contest_notices.name AS notice_name",
                                                     "cities.id AS city_id",
                                                     "cities.full_name AS city_name",
                                                     "states.short_name AS state_name",
                                                     "contest_areas.name AS area_name",
                                                     "contest_areas.status",
-                                                    "contest_areas.created_at",
-                                                    "contest_areas.updated_at",
-                                                   /*  "arca.area_requirement_id",
-                                                    "arca.contest_area_id",
-                                                    "ar.name AS requirement_name" */)
+                                                    "contest_areas.updated_at")
                                             ->join("contest_notices", 'contest_notices.id', 'contest_areas.contest_notice_id')
                                             ->join("contest_categories", 'contest_categories.id', 'contest_notices.contest_category_id')
                                             ->join("cities", 'cities.id', 'contest_areas.city_id')
                                             ->join("states", 'states.id', 'cities.state_id')
-                                            /* ->join("area_requirement_contest_area AS arca", 'arca.contest_area_id', 'contest_areas.id')*/
                                             ->where($this->search_input, 'like', '%'.$this->search.'%')
                                             ->orderBy('contest_areas.id')
                                             ->paginate($this->per_page),
