@@ -67,9 +67,9 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nome</th>
+                                    <th>Categoria</th>
                                     <th>Cidade</th>
                                     <th>Estado</th>
-                                    <th>Categoria</th>
                                     <th>Edital</th>
                                     <th>Editado em</th>
                                     <th>Status</th>
@@ -81,9 +81,9 @@
                                 <tr>
                                     <td class="text-muted">{{ $contestArea->area_id }}</td>
                                     <td>{{ $contestArea->area_name }}</td>
+                                    <td>{{ $contestArea->category_name }}</td>
                                     <td>{{ $contestArea->city_name }}</td>
                                     <td>{{ $contestArea->state_name }}</td>
-                                    <td>{{ $contestArea->category_name }}</td>
                                     <td>{{ $contestArea->notice_name }}</td>
                                     <td>{{ $contestArea->updated_at->format('j M Y, h:i:s')}}</td>
                                     <td>

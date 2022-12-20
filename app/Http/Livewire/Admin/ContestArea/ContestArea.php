@@ -37,7 +37,6 @@ class ContestArea extends Component
         'name' => 'required|string',
         'city_id' => 'required',
         'contest_notice_id' => 'required',
-        'area_requirement_id' => 'required',
     ];
 
     public function updated($fields)
@@ -68,7 +67,6 @@ class ContestArea extends Component
             $contestArea->save();
             $contestArea->areaRequirements()->sync($this->area_requirement_id);
 
-
             $this->showEventMessage('Cadastrado realizado com sucesso.', 'success');
             $this->dispatchBrowserEvent('hideAddContestAreaModal');
         } catch (\Illuminate\Database\QueryException $eQuery) {
@@ -84,16 +82,11 @@ class ContestArea extends Component
         $this->city_id = $contestArea['city_id'];
         $this->name = $contestArea['area_name'];
         $this->status = $contestArea['status'];
+
         $areaRequirementContestIds = AreaRequirementContestArea::select('area_requirement_id')->where('contest_area_id', $this->contest_area_id)->get();
         foreach ($areaRequirementContestIds as $areaRequirementContestId) {
             $this->area_requirement_id[] = $areaRequirementContestId->area_requirement_id;
         }
-
-
-
-
-
-
         $this->dispatchBrowserEvent('showEditContestAreaModal');
     }
 
@@ -102,10 +95,12 @@ class ContestArea extends Component
         $this->validate();
         try {
             $contestArea = ModelsContestArea::find($this->contest_area_id);
+            $contestArea->contest_notice_id = $this->contest_notice_id;
+            $contestArea->city_id = $this->city_id;
             $contestArea->name = $this->name;
             $contestArea->status = $this->status;
-            $contestArea->state_id = $this->state;
             $contestArea->save();
+            $contestArea->areaRequirements()->sync($this->area_requirement_id);
 
             $this->showEventMessage('Alteração realizada com sucesso.','success');
             $this->dispatchBrowserEvent('hideEditContestAreaModal');
