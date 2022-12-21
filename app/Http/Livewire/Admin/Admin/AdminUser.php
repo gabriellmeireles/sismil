@@ -79,7 +79,7 @@ class AdminUser extends Component
             $user->email_verified_at = now();
             $user->user_type_id = $this->user_type;
             $user->save();
-            
+
             $userId = User::firstWhere('cpf', $this->cpf);
 
             $admin = new Admin();
@@ -92,7 +92,7 @@ class AdminUser extends Component
 
             DB::commit();
                 $this->showEventMessage('Cadastrado com sucesso. Os dados de acesso foram enviados por email!', 'success');
-                $this->dispatchBrowserEvent('hideAddAdminModal');           
+                $this->dispatchBrowserEvent('hideAddAdminModal');
         } catch (\Illuminate\Database\QueryException $eQuery) {
             $this->showEventMessage('Não foi possível cadastrar o Usuário. <br><strong>Exceção: Banco de Dados</strong>!', 'error');
         }
@@ -111,7 +111,7 @@ class AdminUser extends Component
                 $this->dispatchBrowserEvent('hideAddAdminModal');
             }
         }
-        
+
     }
 
     public function edit($admin)
@@ -127,8 +127,8 @@ class AdminUser extends Component
         $this->email = $admin['user']['email'];
         $this->status = $admin['user']['status'];
         $this->user_type = $admin['user']['user_type_id'];
-        
-        
+
+
         $this->dispatchBrowserEvent('showEditAdminModal');
     }
 
@@ -148,7 +148,7 @@ class AdminUser extends Component
             $user->status = $this->status;
             $user->user_type_id = $this->user_type;
             $user->save();
-            
+
             $admin = Admin::find($this->admin_id);
             $admin->war_name = $this->war_name;
             $admin->rank_degree_id = $this->rank_degree;
@@ -158,7 +158,7 @@ class AdminUser extends Component
 
             DB::commit();
                 $this->showEventMessage('Cadastrado alterado com sucesso!', 'success');
-                $this->dispatchBrowserEvent('hideEditAdminModal');           
+                $this->dispatchBrowserEvent('hideEditAdminModal');
         } catch (\Illuminate\Database\QueryException $eQuery) {
             $this->showEventMessage('Não foi possível realizar a alteração. <br><strong>Exceção no Banco de Dados</strong>!', 'error');
             $this->dispatchBrowserEvent('hideEditAdminModal');
@@ -182,7 +182,7 @@ class AdminUser extends Component
             $user->update([
                 'status' => 0,
             ]);
-           
+
 
         $this->showEventMessage('O usuário foi desativado com sucesso!' ,'success');
         } catch (\Illuminate\Database\QueryException $eQuery) {
@@ -197,13 +197,13 @@ class AdminUser extends Component
             'type' => $type,
         ]);
     }
-    
+
     public function render()
     {
         $userTypes = UserType::select('id', 'name')->get();
-       
+
         return view('livewire.admin.admin.admin-user', [
-            'admins' => Admin::select('admins.id', 
+            'admins' => Admin::select('admins.id',
                                             'admins.war_name',
                                             'admins.rank_degree_id',
                                             'admins.combat_arm_id',
@@ -212,8 +212,8 @@ class AdminUser extends Component
                                             'users.name',
                                             'users.cpf',
                                             'users.email',
-                                            'users.status', 
-                                            'users.user_type_id', 
+                                            'users.status',
+                                            'users.user_type_id',
                                             'user_types.name as user_type_name',
                                             )
                                     ->join('users', 'users.id', '=', 'admins.user_id')
@@ -221,7 +221,7 @@ class AdminUser extends Component
                                     /* ->join('sections', 'sections.id', '=', 'admins.section_id')
                                     ->join('combat_arms', 'combat_arms.id', '=', 'admins.combat_arm_id')
                                     ->join('rank_degrees', 'rank_degrees.id', '=', 'admins.rank_degree_id') */
-                                    ->where('user_type_id', '!=', 7)
+                                    ->where('user_type_id', '!=', 0)
                                     ->where($this->search_input, 'like', '%'.$this->search.'%')
                                     ->orderBy('admins.id')
                                     ->paginate($this->per_page),

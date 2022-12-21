@@ -72,7 +72,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'status' => 1,
-            'user_type_id' => 7
+            'user_type_id' => 0
         ]);
     } */
 
@@ -91,7 +91,7 @@ class RegisterController extends Controller
         $user->email = $request->email;
         $user->password = Hash::make($request->password);
         $user->status = 1;
-        $user->user_type_id = 7;
+        $user->user_type_id = 0;
 
         if ($user->save()) {
             return redirect()->route('login')->with('success','Usuário criado com sucesso!');

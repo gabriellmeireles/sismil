@@ -26,12 +26,12 @@ class RedirectIfAuthenticated
                 return redirect(RouteServiceProvider::HOME);
             } */
 
-            if (Auth::guard($guard)->check() && Auth::user()->user_type_id == 7) {
+            if (Auth::guard($guard)->check() && Auth::user()->user_type_id == 0) {
                 return redirect()->route('user.dashboard');
-            } elseif(Auth::guard($guard)->check() && Auth::user()->user_type_id != 7) {
+            } elseif(Auth::guard($guard)->check() && Auth::user()->user_type_id != 0) {
                 return redirect()->route('admin.dashboard');
             }
-            
+
         }
 
         return $next($request);

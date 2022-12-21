@@ -38,7 +38,7 @@ class ResetPasswordController extends Controller
      */
     //protected $redirectTo = RouteServiceProvider::HOME;
     protected function redirectTo(){
-        if (Auth()->user()->user_type_id == 7 ) {
+        if (Auth()->user()->user_type_id == 0 ) {
             return route('user.dashboard');
         }else{
             return route('admin.dashboard');

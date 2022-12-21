@@ -18,7 +18,7 @@ class isUserMiddleware
     public function handle(Request $request, Closure $next)
     {
         if (Auth::check()) {
-            if (Auth::user()->user_type_id == 7) {
+            if (Auth::user()->user_type_id == 0) {
                 return $next($request);
             }else{
                 return redirect()->route('admin.dashboard')->with('error','Acesso não permitido');
@@ -26,6 +26,6 @@ class isUserMiddleware
         } else {
             return redirect()->route('login');
         }
-        
+
     }
 }

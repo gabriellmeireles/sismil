@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    
+
 
     /**
      * Create a new controller instance.
@@ -38,7 +38,7 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        
+
     }
 
     public function login(Request $request)
@@ -50,7 +50,7 @@ class LoginController extends Controller
         ]);
         $returnUrl = (isset($request->session()->get('url')['intended'])) ? $request->session()->get('url')['intended'] : null;
         if (auth()->attempt(array('cpf'=>$input['cpf'], 'password'=>$input['password']))) {
-            if (auth()->user()->user_type_id == 7) {
+            if (auth()->user()->user_type_id == 0) {
                 if ($returnUrl != null) {
                     return redirect()->to($returnUrl);
                 } else {
@@ -66,6 +66,6 @@ class LoginController extends Controller
         }else{
             return redirect()->route('login')->with('error', 'Login ou senha incorretos');
         }
-        
+
     }
 }
