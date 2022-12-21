@@ -47,6 +47,21 @@ class CandidateType extends Component
         $this->resetErrorBag();
     }
 
+    public function create(){
+        $this->validate();
+        try {
+            $candidateType = new ModelsCandidateType();
+            $candidateType->name = $this->name;
+            $candidateType->status = $this->status;
+            $candidateType->save();
+
+            $this->showEventMessage('Cadastrado realizado com sucesso.', 'success');
+            $this->dispatchBrowserEvent('hideAddCandidateTypeModal');
+        } catch (\Illuminate\Database\QueryException $eQuery) {
+            $this->showEventMessage('Não foi possível realizar o cadastrar. <br><strong>Exceção: Banco de Dados</strong>!', 'error');
+        }
+    }
+
     public function render()
     {
         return view('livewire.admin.candidate-type.candidate-type',[

@@ -105,6 +105,6 @@
             </div>
         </div>
     </div>
-    {{-- @include('livewire.admin.candidate-type.candidate-type-create')
+    @include('livewire.admin.candidate-type.candidate-type-create')
     @include('livewire.admin.candidate-type.candidate-type-edit')
-    @include('livewire.admin.candidate-type.candidate-type-disable') --}}
+    @include('livewire.admin.candidate-type.candidate-type-disable')
