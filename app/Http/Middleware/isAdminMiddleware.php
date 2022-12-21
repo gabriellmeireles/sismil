@@ -19,7 +19,7 @@ class isAdminMiddleware
     public function handle(Request $request, Closure $next, string $userType)
     {
        /*  if (Auth::check()) {
-            if (Auth::user()->user_type_id != 7) {
+            if (Auth::user()->user_type_id != 0) {
                 return $next($request);
             }else{
                 return redirect()->route('user.dashboard')->with('error','Acesso não permitido');
@@ -40,6 +40,6 @@ class isAdminMiddleware
         } else {
             return redirect()->route('login');
         }
-        
+
     }
 }
