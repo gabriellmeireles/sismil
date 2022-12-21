@@ -34,6 +34,9 @@
             </div>
             <div class="text-center text-muted mt-3">
                 Voltar para a tela de <a href="{{route('login')}}" tabindex="-1">Login</a>
+                ou
+                <a href="#" onclick="event.preventDefault();document.getElementById('logout-form').submit();">Sair</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">@csrf</form>
             </div>
         </div>
     </div>
