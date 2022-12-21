@@ -19,7 +19,7 @@ class CheckUserType
     {
         $userTypes = [
             'admin' => [1,2,3,4,5,6],
-            'user' => [7],
+            'user' => [0],
         ];
             if (!in_array(auth()->user()->user_type_id, $userTypes[$userType])) {
                 abort(403);

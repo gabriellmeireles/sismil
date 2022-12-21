@@ -30,7 +30,7 @@ class isAdminMiddleware
 
         $userTypes = [
             'admin' => [1,2,3,4,5,6],
-            'user' => [7],
+            'user' => [0],
         ];
         if (Auth::check()) {
             if (!in_array(auth()->user()->user_type_id, $userTypes)) {
