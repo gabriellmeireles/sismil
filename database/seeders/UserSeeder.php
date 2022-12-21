@@ -23,6 +23,7 @@ class UserSeeder extends Seeder
             'password' => Hash::make('123456'),
             'status' => 1,
             'user_type_id' => 1,
+            'email_verified_at' => now(),
         ]);
     }
 }
