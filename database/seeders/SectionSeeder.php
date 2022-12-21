@@ -18,6 +18,7 @@ class SectionSeeder extends Seeder
         Section::create([
             'full_name' => 'Seção de Tecnologia da Informação',
             'short_name' => 'STI',
+            'status' => 1,
         ]);
     }
 }
