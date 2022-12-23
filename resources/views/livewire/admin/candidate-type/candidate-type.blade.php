@@ -83,7 +83,7 @@
                                         <a wire:click.prevent='edit({{ $candidateType }})'
                                             class="btn btn-outline-lime btn-sm">Editar</a>
 
-                                        <a wire:click.prevent='delete({{ $candidateType }})'
+                                        <a wire:click.prevent='deactivate({{ $candidateType }})'
                                             class="btn btn-outline-yellow btn-sm">Desativar</<a>
                                     </td>
                                 </tr>

@@ -1,12 +1,13 @@
-{{-- CREATE MODAL --}}
-<div wire:ignore.self class="modal modal-blur fade" id="create_candidate_type-modal" tabindex="-1" role="dialog" aria-hidden="true">
+{{-- EDIT MODAL --}}
+<div wire:ignore.self class="modal modal-blur fade" id="edit_candidate_type-modal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Tipo de Candidato | Cadastrar</h5>
+                <h5 class="modal-title">Tipo de Candidato | Editar</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form wire:submit.prevent='create()' method="POST">
+            <form wire:submit.prevent='update()' method="POST">
+                <input type="hidden" wire:model='candidate_type_id'>
                 <div class="modal-body">
                     <div class="row">
                         <div class="col-lg-8">
@@ -20,8 +21,7 @@
                             <div class="mb-3">
                                 <label class="form-label">Status</label>
                                 <select class="form-select @error('status'){{ 'is-invalid' }}@enderror" wire:model='status'>
-                                    <option></option>
-                                    <option value="1">Ativo</option>
+                                    <option value="1" selected>Ativo</option>
                                     <option value="0">Inativo</option>
                                 </select>
                                 <span class="text-danger">@error('status'){{ $message }}@enderror</span>
