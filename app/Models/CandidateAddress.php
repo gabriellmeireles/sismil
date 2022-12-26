@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class CandidateAddress extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+        'address',
+        'district',
+        'city',
+        'zip_code',
+    ];
+
+    public function candidate()
+    {
+        return $this->hasOne(Candidate::class, 'address_id', 'id');
+    }
+}
