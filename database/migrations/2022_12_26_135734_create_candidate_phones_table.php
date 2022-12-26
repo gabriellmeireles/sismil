@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->integer('ddd',2);
             $table->bigInteger('number',9);
+            $table->foreignId('candidate_id')->constrained('candidates', 'id');
             $table->timestamps();
         });
     }
