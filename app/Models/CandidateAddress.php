@@ -18,6 +18,6 @@ class CandidateAddress extends Model
 
     public function candidate()
     {
-        return $this->hasOne(Candidate::class, 'address_id', 'id');
+        return $this->hasOne(Candidate::class, 'candidate_address_id', 'id');
     }
 }
