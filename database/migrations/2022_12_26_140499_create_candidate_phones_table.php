@@ -13,12 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('candidate_addresses', function (Blueprint $table) {
+        Schema::create('candidate_phones', function (Blueprint $table) {
             $table->id();
-            $table->string('address');
-            $table->string('district');
-            $table->string('city');
-            $table->string('zip_code');
+            $table->integer('ddd');
+            $table->integer('number');
+            $table->foreignId('candidate_id')->constrained('candidates', 'id');
             $table->timestamps();
         });
     }
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('candidate_addresses');
+        Schema::dropIfExists('candidate_phones');
     }
 };

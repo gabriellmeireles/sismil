@@ -26,7 +26,6 @@ return new class extends Migration
             $table->string('mother_name');
             $table->string('father_name');
             $table->foreignId('candidate_type_id')->constrained('candidate_types','id');
-            $table->foreignId('candidate_addres_id')->constrained('candidate_addresses','id');
             $table->foreignId('user_id')->constrained('users','id');
             $table->timestamps();
         });
