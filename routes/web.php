@@ -51,6 +51,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['checkUserType:admin','auth','pr
     Route::view('area-edital', 'admin.contest-area.index')->name('admin.contest-area');
     Route::view('area-exigencia', 'admin.area-requirement.index')->name('admin.area-requirement');
     Route::view('tipo-candidato', 'admin.candidate-type.index')->name('admin.candidate-type');
+    Route::view('candidato', 'admin.candidate.index')->name('admin.candidate');
     Route::group(['middleware' => ['checkUserType:auditor']], function(){
         //para futuras permições por tipo de usuário
     });
