@@ -13,7 +13,7 @@ class Candidate extends Component
     protected $paginationTheme = 'bootstrap';
     public $search = '';
     public $per_page = 10;
-    public $search_input = 'name';
+    public $search_input = 'users.name';
 
     public function updatingPerPage()
     {
@@ -42,8 +42,17 @@ class Candidate extends Component
     public function render()
     {
         return view('livewire.admin.candidate.candidate',[
-            'candidates' => ModelsCandidate::rightJoin('users', 'users.id', 'candidates.id')
+            'candidates' => ModelsCandidate::select('candidates.id',
+                                                    'candidates.photo',
+                                                    'users.name',
+                                                    'users.cpf',
+                                                    'users.email',
+                                                    'candidate_phones.number',
+                                                    "candidate_types.name AS user_type_name",
+                                                    'candidates.nationality')
+                                            ->rightJoin('users', 'users.id', 'candidates.id')
                                             ->leftJoin('candidate_phones', 'candidate_phones.candidate_id', 'candidate_id')
+                                            ->leftJoin('candidate_types', 'candidate_types.id', 'candidates.candidate_type_id')
                                             ->where('users.user_type_id', 0)
                                             ->where($this->search_input, 'like', '%'.$this->search.'%')
                                             ->orderBy('candidates.id')

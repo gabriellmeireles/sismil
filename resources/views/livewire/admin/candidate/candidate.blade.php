@@ -3,7 +3,7 @@
         <div class="page-header mb-4">
             <div class="row align-items-center">
                 <div class="col">
-                    <h2 class="page-title">Militares</h2>
+                    <h2 class="page-title">Candidatos</h2>
                 </div>
                 <div class="col-auto ms-auto d-print-none">
                     <div class="d-flex">
@@ -85,7 +85,7 @@
                                         <td>{{ $candidate->cpf}}</td>
                                         <td>{{ $candidate->email }}</td>
                                         <td>{{ $candidate->number }}</td>
-                                        <td>{{ $candidate->name }}</td>
+                                        <td>{{ $candidate->user_type_name }}</td>
                                         <td>{{ $candidate->nationality }}</td>
                                         <td>
                                             <a wire:click.prevent='edit({{ $candidate }})' class="btn btn-outline-lime btn-sm">Editar</a>
