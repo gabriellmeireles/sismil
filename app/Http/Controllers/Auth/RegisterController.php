@@ -95,7 +95,7 @@ class RegisterController extends Controller
 
         if ($user->save()) {
             $user->sendEmailVerificationNotification();
-            return redirect()->route('login')->with('success','Usuário criado com sucesso!');
+            return redirect()->route('login')->with('success','Usuário criado com sucesso! <br> Enviamos um email para a ativação de sua conta.');
         }else{
             return redirect()->back()->with('error','Erro ao se registrar, tente novamente.');
         }
