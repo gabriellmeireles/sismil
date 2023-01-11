@@ -13,6 +13,7 @@ class CandidateAddress extends Model
         'address',
         'district',
         'city',
+        'state',
         'zip_code',
     ];
 
