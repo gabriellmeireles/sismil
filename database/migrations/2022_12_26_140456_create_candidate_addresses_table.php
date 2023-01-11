@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('address');
             $table->string('district');
             $table->string('city');
+            $table->string('state',2);
             $table->string('zip_code');
             $table->foreignId('candidate_id')->constrained('candidates','id');
             $table->timestamps();
