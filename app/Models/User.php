@@ -27,6 +27,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'cpf',
         'password',
         'user_type_id',
+        'complete_registration',
         'status'
     ];
 
@@ -79,7 +80,14 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->hasOne(Admin::class,'user_id','id');
     }
 
-    public function person(){
-        return $this->hasOne(Person::class,'user_id','id');
+    public function candidate(){
+        return $this->hasOne(Candidate::class,'user_id','id');
+    }
+
+    public function getRegistration(){
+        if ($this->completed_registration == 0) {
+            return false;
+        }
+        return true;
     }
 }

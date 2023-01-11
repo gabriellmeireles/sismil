@@ -21,6 +21,7 @@ return new class extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('complete_registration')->default(0);
             $table->foreignId('user_type_id')->constrained('user_types');
             $table->rememberToken();
             $table->timestamps();
