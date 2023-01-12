@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -13,12 +14,17 @@ class UserController extends Controller
 
     public function index()
     {
-       return view('user.user.index');
+        if (auth()->user()->complete_registration) {
+            return view('user.user.index');
+        }
+        return $this->profile();
+
     }
 
     public function profile()
     {
-       return view('user.user.profile');
+       return view('user.user.profile',[session()->flash('message', 'Para dar continuidade ao processo seletivo, por favor finalize seu cadastro.')]);
     }
+
 
 }
