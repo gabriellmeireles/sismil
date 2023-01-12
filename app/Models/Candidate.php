@@ -16,6 +16,7 @@ class Candidate extends Model
         'photo',
         'birth_date',
         'marital_status',
+        'dependent_number',
         'nationality',
         'naturalness',
         'mother_name',
@@ -25,9 +26,9 @@ class Candidate extends Model
         'user_id',
     ];
 
-    public function candidatePhones()
+    public function candidatePhone()
     {
-        return $this->hasMany(CandidatePhone::class, 'candidate_id', 'id');
+        return $this->hasOne(CandidatePhone::class, 'candidate_id', 'id');
     }
 
     public function candidateType()
@@ -37,7 +38,7 @@ class Candidate extends Model
 
     public function candidateAddress()
     {
-        return $this->hasOne(CandidateAddress::class, 'candidate_address_id', 'id');
+        return $this->hasOne(CandidateAddress::class, 'candidate_id', 'id');
     }
 
     public function user()

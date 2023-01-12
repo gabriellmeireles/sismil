@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('photo');
             $table->date('birth_date');
             $table->string('marital_status');
+            $table->tinyInteger('dependent_number');
             $table->string('nationality');
             $table->string('naturalness');
             $table->string('mother_name');
