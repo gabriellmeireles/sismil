@@ -23,7 +23,10 @@ class UserController extends Controller
 
     public function profile()
     {
-       return view('user.user.profile',[session()->flash('message', 'Para dar continuidade ao processo seletivo, por favor finalize seu cadastro.')]);
+        if (auth()->user()->complete_registration == 0) {
+            return view('user.user.profile',[session()->flash('message', 'Para dar continuidade ao processo seletivo, por favor finalize seu cadastro.')]);
+        }
+        return view('user.user.profile');
     }
 
 
