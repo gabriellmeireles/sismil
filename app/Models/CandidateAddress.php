@@ -15,6 +15,7 @@ class CandidateAddress extends Model
         'city',
         'state',
         'zip_code',
+        'candidate_id',
     ];
 
     public function candidate()
