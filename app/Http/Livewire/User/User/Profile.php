@@ -131,8 +131,8 @@ class Profile extends Component
             ]
         );
 
-        /* $this->emit('updateProfileHeader');
-        $this->emit('updateNavbar'); */
+        $this->emit('updateProfileHeader');
+        $this->emit('updateNavbar');
 
         $this->showEventMessage('Os dados foram atualizado com sucesso.','success');
     }
