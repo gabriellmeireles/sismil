@@ -49,7 +49,7 @@
         {{-- INICIO ABA MUDAR SENHA --}}
         <div class="tab-pane" id="tabs-password">
           <div class="mt-2">
-            {{-- @livewire('user.user.change-password') --}}
+            @livewire('user.user.change-password')
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@
                         @forelse ( $candidateTypes as $candidateType)
                             <option value="{{ $candidateType->id }}" disabled>{{ $candidateType->name }}</option>
                         @empty
-
+                            Tipos de Usuário não cadastrados.
                         @endforelse
                     </select>
                 </div>
