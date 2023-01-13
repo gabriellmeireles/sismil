@@ -7,7 +7,7 @@
             {!! Session::get('message') !!}
         </div>
     @endif
-{{-- @livewire('admin.profile.profile-header') --}}
+@livewire('user.user.profile-header')
 
 <hr>
 <div class="row">
