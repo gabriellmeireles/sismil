@@ -2,13 +2,13 @@
 
 namespace App\Http\Livewire\Admin\Profile;
 
-use App\Models\Admin;
+use App\Models\User;
 use Livewire\Component;
 
 class ProfileHeader extends Component
 {
 
-    public $admin;
+    public $user;
 
     protected $listeners = [
         'updateProfileHeader' => '$refresh'
@@ -16,9 +16,8 @@ class ProfileHeader extends Component
 
     public function mount()
     {
-        $this->admin = Admin::find(auth('web')->id());
+        $this->user = User::find(auth('web')->id());
     }
-
     public function render()
     {
         return view('livewire.admin.profile.profile-header');

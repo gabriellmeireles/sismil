@@ -13,7 +13,7 @@ use Livewire\Component;
 class Profile extends Component
 {
 
-    public $admins, $rankDegrees, $combatArms, $sections, $userTypes;
+    public $user, $rankDegrees, $combatArms, $sections, $userTypes;
     public $name, $email, $cpf, $status, $user_type, $war_name, $rank_degree, $combat_arm, $section;
 
     protected $rules = [
@@ -23,27 +23,27 @@ class Profile extends Component
 
     public function updated($fields)
     {
-        $this->validateOnly($fields);  
+        $this->validateOnly($fields);
     }
 
     public function mount()
     {
-        
+
         $this->rankDegrees = RankDegree::get();
         $this->combatArms = CombatArm::get();
         $this->sections = Section::get();
         $this->userTypes = userType::get();
-        $this->admins = Admin::find(auth('web')->id());
+        $this->user = User::find(auth('web')->id());
 
-        $this->name = $this->admins->user->name;
-        $this->email = $this->admins->user->email;
-        $this->cpf = $this->admins->user->cpf;
-        $this->status = $this->admins->user->status;
-        $this->user_type = $this->admins->user->user_type_id;
-        $this->war_name = $this->admins->war_name;
-        $this->rank_degree = $this->admins->rank_degree_id;
-        $this->combat_arm = $this->admins->combat_arm_id;
-        $this->section = $this->admins->section_id;
+        $this->name = $this->user->name;
+        $this->email = $this->user->email;
+        $this->cpf = $this->user->cpf;
+        $this->status = $this->user->status;
+        $this->user_type = $this->user->user_type_id;
+        $this->war_name = $this->user->admin->war_name;
+        $this->rank_degree = $this->user->admin->rank_degree_id;
+        $this->combat_arm = $this->user->admin->combat_arm_id;
+        $this->section = $this->user->admin->section_id;
 
     }
 
