@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('identity');
             $table->string('issuing_agency');
             $table->string('gender');
-            $table->string('photo');
+            $table->string('photo')->nullable();
             $table->date('birth_date');
             $table->string('marital_status');
             $table->tinyInteger('dependent_number');
