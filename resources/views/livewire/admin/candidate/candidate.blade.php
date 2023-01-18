@@ -84,7 +84,7 @@
                                         <td>{{ $candidate->name }}</td>
                                         <td>{{ $candidate->cpf}}</td>
                                         <td>{{ $candidate->email }}</td>
-                                        <td>{{ $candidate->number }}</td>
+                                        <td>{{ $candidate->ddd }} {{ $candidate->number }}</td>
                                         <td>{{ $candidate->user_type_name }}</td>
                                         <td>{{ $candidate->nationality }}</td>
                                         <td>
