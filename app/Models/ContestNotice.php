@@ -23,4 +23,8 @@ class ContestNotice extends Model
     public function contestSetting(){
         return $this->belongsTo(ContestSetting::class, 'contest_setting_id', 'id');
     }
+
+    public function contestAreas(){
+        return $this->hasMany(ContestArea::class, 'contest_notice_id', 'id');
+    }
 }
