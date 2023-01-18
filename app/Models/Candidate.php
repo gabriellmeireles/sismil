@@ -21,6 +21,8 @@ class Candidate extends Model
         'naturalness',
         'mother_name',
         'father_name',
+        'height',
+        'weight',
         'candidate_type_id',
         'candidate_addres_id',
         'user_id',
