@@ -8,7 +8,7 @@ use Livewire\WithPagination;
 
 class AreaRequirement extends Component
 {
-    public $name, $status;
+    public $name, $status, $area_requirement_id;
 
     use WithPagination;
 
