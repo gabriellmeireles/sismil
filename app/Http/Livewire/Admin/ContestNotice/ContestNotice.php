@@ -10,8 +10,9 @@ use Livewire\WithPagination;
 
 class ContestNotice extends Component
 {
-    public $name, $status, $contest_category, $contest_setting, $short_name;
+    public $name, $contest_category, $contest_setting, $short_name, $contest_notice_id;
     public $year, $initial_inscription, $final_inscription, $gru_expiration, $min_age, $max_age, $min_male_height, $min_female_height;
+    public $status = 1;
 
     use WithPagination;
 
