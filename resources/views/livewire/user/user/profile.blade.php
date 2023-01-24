@@ -5,8 +5,9 @@
                 <div class="mb-3">
                     <label class="form-label">Tipo de Candidato</label>
                     <select name="candidate_type_id" id="candidate_type_id" class="form-control" wire:model='candidate_type_id'>
+                        <option>---</option>
                         @forelse ( $candidateTypes as $candidateType)
-                            <option value="{{ $candidateType->id }}" disabled>{{ $candidateType->name }}</option>
+                            <option value="{{ $candidateType->id }}">{{ $candidateType->name }}</option>
                         @empty
                             Tipos de Usuário não cadastrados.
                         @endforelse
@@ -60,6 +61,22 @@
                     <label class="form-label">Nº de Dependentes</label>
                     <input type="number" class="form-control @error('dependent_number'){{ 'is-invalid' }}@enderror" min="0" wire:model='dependent_number' name="dependent_number" placeholder="Nº de Dependentes">
                     <span class="invalid-feedback"> @error('dependent_number') {{ $message }} @enderror </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="mb-3">
+                    <label class="form-label">Altura</label>
+                    <input type="text" class="form-control @error('height'){{ 'is-invalid' }}@enderror" wire:model='height'>
+                    <span class="invalid-feedback">@error('height') {{ $message }} @enderror</span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="mb-3">
+                    <label class="form-label">Peso</label>
+                    <input type="text" class="form-control @error('weight'){{ 'is-invalid' }}@enderror" wire:model='weight'>
+                    <span class="invalid-feedback">@error('weight') {{ $message }} @enderror</span>
                 </div>
             </div>
         </div>

@@ -15,8 +15,6 @@ class Form extends Component
 
     protected $listeners = ['contestRegister' => 'createForm'];
 
-
-
     public function render()
     {
         return view('livewire.user.user.form',[

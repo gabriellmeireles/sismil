@@ -16,8 +16,8 @@
         </div>
         <div class="card-footer">
             <div class="d-flex">
-                <a wire:click.prevent='visualize({{ $contest }})' class="btn btn-success">Visualizar</a>
-                <a wire:click.prevent="register({{ $contest }})" class="btn btn-success ms-auto">Inscreva-se</a>
+                <a wire:click.prevent='visualize({{ $contest->id }})' class="btn btn-success">Visualizar</a>
+                <a wire:click.prevent="register({{ $contest->id }})" class="btn btn-success ms-auto">Inscreva-se</a>
             </div>
           </div>
         </div>

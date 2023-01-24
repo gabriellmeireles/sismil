@@ -11,8 +11,8 @@ class DashboardContest extends Component
 {
     public function register($contest)
     {
-        $this->emit('contestRegister', $contest);
-        return redirect()->route('user.contest-register');
+        return redirect()->route('user.contest-register',['contest' => $contest]);
+        dd($contest);
     }
 
     public function render()

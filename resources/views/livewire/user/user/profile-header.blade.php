@@ -7,7 +7,7 @@
             <div class="page-subtitle">
               <div class="row">
                 <div class="col-auto">
-                  <span class="text-reset">{{ $user->candidate->candidateType->name }}</span>
+                  <span class="text-reset">{{ (isset($user->candidate->candidateType->name))? $user->candidate->candidateType->name : ' '  }}</span>
                 </div>
               </div>
             </div>
