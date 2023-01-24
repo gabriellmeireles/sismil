@@ -16,8 +16,59 @@ class RankDegreeSeeder extends Seeder
     public function run()
     {
         RankDegree::create([
+            'id' => 1,
             'full_name' => 'Administrador',
             'short_name' => 'Admin'
         ]);
+        RankDegree::create([
+            'full_name' => '1º Tenente',
+            'short_name' => '1º Ten'
+        ]);
+        RankDegree::create([
+            'full_name' => '2º Tenente',
+            'short_name' => '2º Ten'
+        ]);
+        RankDegree::create([
+            'full_name' => 'Aspirante',
+            'short_name' => 'Asp Of'
+        ]);
+        RankDegree::create([
+            'full_name' => 'Subtenente ',
+            'short_name' => 'ST'
+        ]);
+        RankDegree::create([
+            'full_name' => '1º Sargento ',
+            'short_name' => '1º Sgt'
+        ]);
+        RankDegree::create([
+            'full_name' => '2º Sargento ',
+            'short_name' => '2º Sgt'
+        ]);
+        RankDegree::create([
+            'full_name' => '3º Sargento ',
+            'short_name' => '2º Sgt'
+        ]);
+        RankDegree::create([
+            'full_name' => 'Cabo',
+            'short_name' => 'Cb'
+        ]);
+        RankDegree::create([
+            'full_name' => 'Soldado',
+            'short_name' => 'Sd'
+        ]);
+        RankDegree::create([
+            'full_name' => 'Taifeiro Mor',
+            'short_name' => 'TM'
+        ]);
+        RankDegree::create([
+            'full_name' => 'Taifeiro 1ª Classe',
+            'short_name' => 'T1'
+        ]);
+        RankDegree::create([
+            'full_name' => 'Taifeiro 2ª Classe',
+            'short_name' => 'T2'
+        ]);
+
+        RankDegree::where('id', 1)->update(['id' => 0]);
     }
 }

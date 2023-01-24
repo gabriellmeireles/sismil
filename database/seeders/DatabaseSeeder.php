@@ -22,6 +22,11 @@ class DatabaseSeeder extends Seeder
             SectionSeeder::class,
             UserSeeder::class,
             AdminSeeder::class,
+            StateSeeder::class,
+            CitySeeder::class,
+            MilitaryCommandSeeder::class,
+            MilitaryRegionSeeder::class,
+            MilitaryOrganizationSeeder::class,
         ]);
     }
 }

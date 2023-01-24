@@ -20,5 +20,10 @@ class SectionSeeder extends Seeder
             'short_name' => 'STI',
             'status' => 1,
         ]);
+        Section::create([
+            'full_name' => 'Comissão de Seleção Especial',
+            'short_name' => 'CSE',
+            'status' => 1,
+        ]);
     }
 }
