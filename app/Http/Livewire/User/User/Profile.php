@@ -7,12 +7,13 @@ use App\Models\CandidateAddress;
 use App\Models\CandidatePhone;
 use App\Models\CandidateType;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
 class Profile extends Component
 {
     public $user_id, $candidate_id, $candidate_type_id = 2;
-    public $name, $birth_date, $gender, $marital_status, $dependent_number;
+    public $name, $birth_date, $gender, $marital_status, $dependent_number, $height, $weight;
     public $cpf, $identity, $issuing_agency;
     public $mother_name, $father_name;
     public $naturalness, $nationality;
@@ -27,6 +28,8 @@ class Profile extends Component
         'gender' => 'required',
         'marital_status' => 'required',
         'dependent_number' => 'required|min:0',
+        'height' => 'required',
+        'weight' => 'required',
         'cpf' => 'required|size:11',
         'identity' => 'required',
         'issuing_agency' => 'required',
@@ -64,6 +67,8 @@ class Profile extends Component
             $this->gender = $candidate->gender;
             $this->marital_status = $candidate->marital_status;
             $this->dependent_number = $candidate->dependent_number;
+            $this->height = $candidate->height;
+            $this->weight = $candidate->weight;
             $this->identity = $candidate->identity;
             $this->issuing_agency = $candidate->issuing_agency;
             $this->mother_name = $candidate->mother_name;
@@ -93,48 +98,54 @@ class Profile extends Component
             'email' => $this->email,
             'complete_registration' => 1,
         ]);
+        DB::beginTransaction();
+        try {
+            $candidate = Candidate::updateOrCreate(
+                ['user_id' => $this->user_id],
+                [
+                    'candidate_type_id' => $this->candidate_type_id,
+                    'birth_date' => $this->birth_date,
+                    'gender' => $this->gender,
+                    'marital_status' => $this->marital_status,
+                    'dependent_number' => $this->dependent_number,
+                    'height' => $this->height,
+                    'weight' => $this->weight,
+                    'identity' => $this->identity,
+                    'issuing_agency' => $this->issuing_agency,
+                    'mother_name' => $this->mother_name,
+                    'father_name' => $this->father_name,
+                    'naturalness' => $this->naturalness,
+                    'nationality' => $this->nationality,
+                    'user_id' => $this->user_id
+                ]
+            );
 
-        $candidate = Candidate::updateOrCreate(
-            ['user_id' => $this->user_id],
-            [
-                'candidate_type_id' => $this->candidate_type_id,
-                'birth_date' => $this->birth_date,
-                'gender' => $this->gender,
-                'marital_status' => $this->marital_status,
-                'dependent_number' => $this->dependent_number,
-                'identity' => $this->identity,
-                'issuing_agency' => $this->issuing_agency,
-                'mother_name' => $this->mother_name,
-                'father_name' => $this->father_name,
-                'naturalness' => $this->naturalness,
-                'nationality' => $this->nationality,
-                'user_id' => $this->user_id
-            ]
-        );
+            CandidateAddress::updateOrCreate(
+                ['candidate_id' => $candidate->id ],
+                [
+                    'zip_code' => $this->zip_code,
+                    'address' => $this->address,
+                    'district' => $this->district,
+                    'city' => $this->city,
+                    'state' => $this->state
+                ]
+            );
 
-        CandidateAddress::updateOrCreate(
-            ['candidate_id' => $candidate->id ],
-            [
-                'zip_code' => $this->zip_code,
-                'address' => $this->address,
-                'district' => $this->district,
-                'city' => $this->city,
-                'state' => $this->state
-            ]
-        );
+            CandidatePhone::updateOrCreate(
+                ['candidate_id' => $candidate->id],
+                [
+                    'ddd' => $this->ddd,
+                    'number' => $this->number,
+                ]
+            );
+            DB::commit();
+                $this->emit('updateProfileHeader');
+                $this->emit('updateNavbar');
+                $this->showEventMessage('Os dados foram atualizado com sucesso.','success');
+        } catch (\Illuminate\Database\QueryException $eQuery) {
+            $this->showEventMessage('Não foi possível realizar a alteração. <br><strong>Exceção no Banco de Dados</strong>!', 'error');
+        }
 
-        CandidatePhone::updateOrCreate(
-            ['candidate_id' => $candidate->id],
-            [
-                'ddd' => $this->ddd,
-                'number' => $this->number,
-            ]
-        );
-
-        $this->emit('updateProfileHeader');
-        $this->emit('updateNavbar');
-
-        $this->showEventMessage('Os dados foram atualizado com sucesso.','success');
     }
 
     public function showEventMessage($message, $type)
