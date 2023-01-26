@@ -18,19 +18,6 @@
         <div class="row">
             <div class="col-md-3">
                 <div class="mb-3">
-                    <label class="form-label">Arma/Quadro/Serviço</label>
-                    <select name="candidate_type_id" id="candidate_type_id" class="form-control" wire:model='candidate_type_id'>
-                        <option>---</option>
-                        @forelse ( $combatArms as $combatArm)
-                        <option value="{{ $combatArm->id }}">{{ $combatArm->short_name }}</option>
-                        @empty
-                        Organizações Militares não cadastradas.
-                        @endforelse
-                    </select>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="mb-3">
                     <label class="form-label">Último posto da Ativa</label>
                     <select name="candidate_type_id" id="candidate_type_id" class="form-control"
                         wire:model='candidate_type_id'>
@@ -132,6 +119,42 @@
                     </div>
                 </div>
             @endif
+
+            <div class="row mb-3">
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Curso de Graduação</label>
+                        <input type="text" class="form-control @error('academic_degree_name'){{ 'is-invalid' }}@enderror"
+                            wire:model='academic_degree_name' name="academic_degree_name">
+                        <span class="invalid-feedback"> @error('academic_degree_name') {{ $message }} @enderror </span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label class="form-label">Instituição de Formação</label>
+                        <input type="text" class="form-control @error('academic_institution_name'){{ 'is-invalid' }}@enderror" min="0" max="12"
+                            wire:model='academic_institution_name' name=academic_institution_name placeholder="MÊSES">
+                        <span class="invalid-feedback"> @error('year_service_time') {{ $message }} @enderror </span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="mb-3">
+                        <label class="form-label">Cidade</label>
+                        <input type="number" class="form-control @error('day_service_time'){{ 'is-invalid' }}@enderror" min="0" max="31"
+                            wire:model='day_service_time' name=day_service_time placeholder="DIAS">
+                        <span class="invalid-feedback"> @error('day_service_time') {{ $message }} @enderror </span>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="mb-3">
+                        <label class="form-label">Ano de Conclusão</label>
+                        <input type="number" class="form-control @error('day_service_time'){{ 'is-invalid' }}@enderror" min="0" max="31"
+                            wire:model='day_service_time' name=day_service_time placeholder="DIAS">
+                        <span class="invalid-feedback"> @error('day_service_time') {{ $message }} @enderror </span>
+                    </div>
+                </div>
+
+            </div>
 
         </div>
         <div class="row mb-3">
