@@ -3,6 +3,6 @@
 @section('content')
 
     <div class="row">
-        @livewire('user.user.form')
+        @livewire('user.form.form')
     </div>
 @endsection

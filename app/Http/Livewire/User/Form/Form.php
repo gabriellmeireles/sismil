@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire\User\User;
+namespace App\Http\Livewire\User\Form;
 
 use App\Models\CombatArm;
 use App\Models\ContestArea;
@@ -21,7 +21,7 @@ class Form extends Component
 
     public function render()
     {
-        return view('livewire.user.user.form',[
+        return view('livewire.user.form.form',[
             'combatArms' => CombatArm::get(),
             'rankDegrees' => RankDegree::get(),
             'contestAreas' => ContestArea::get(),

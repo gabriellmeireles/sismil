@@ -1,5 +1,4 @@
 <div>
-    {{ $contest }} - teste
     <form method="post" wire:submit.prevent='storeForm()'>
         <div class="row">
             <div class="col-md-4">

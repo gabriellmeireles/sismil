@@ -61,6 +61,7 @@ Route::group(['prefix'=>'admin', 'middleware'=>['checkUserType:admin','auth','pr
 Route::group(['prefix'=>'user', 'middleware'=>['checkUserType:user','auth','prevent.back.history']], function(){
     Route::get('dashboard',[UserController::class, 'index'])->name('user.dashboard');
     Route::get('profile',[UserController::class, 'profile'])->name('user.profile');
-    Route::view('ficha-inscricao', 'user.user.form')->name('user.contest-register');
+    Route::view('editais', 'user.form.index')->name('user.contest');
+    Route::view('ficha-inscricao', 'user.form.form')->name('user.contest-register');
 
 });

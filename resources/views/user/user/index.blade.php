@@ -15,8 +15,17 @@
 
     @livewire('user.user.profile-header')
 
-    <hr>
+    <div class="hr-text">
+        <span>Editais Abertos</span>
+    </div>
     <div class="row">
-        @livewire('user.user.dashboard-contest')
+        @livewire('user.form.contest-opened')
+    </div>
+
+    <div class="hr-text">
+        <span>Suas Inscrições</span>
+    </div>
+    <div class="row">
+        @livewire('user.user.dashboard')
     </div>
 @endsection
