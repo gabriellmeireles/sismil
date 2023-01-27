@@ -1,6 +1,7 @@
 <div>
+    {{ $contest }} - teste
     <form method="post" wire:submit.prevent='storeForm()'>
-        <div class="row mb-3">
+        <div class="row">
             <div class="col-md-4">
                 <div class="mb-3">
                     <label class="form-label">Área</label>
@@ -45,14 +46,14 @@
                 <div class="mb-4">
                     <label class="form-label">Notal Final no CPOR/NPOR</label>
                     <input type="text" class="form-control @error('course_score'){{ 'is-invalid' }}@enderror"
-                        wire:model='course_score' name="course_score" placeholder="Ex: 8.50">
+                        wire:model='course_score' name="course_score" placeholder="Ex: 8.500">
                     <span class="invalid-feedback"> @error('course_score') {{ $message }} @enderror </span>
                 </div>
             </div>
             <div class="col-md-2">
                 <div class="mb-3">
-                    <label class="form-label">Tuma de Formação (Ano)</label>
-                    <input type="year" class="form-control @error('graduation_class'){{ 'is-invalid' }}@enderror"
+                    <label class="form-label">Turma de Formação (Ano)</label>
+                    <input type="number" class="form-control @error('graduation_class'){{ 'is-invalid' }}@enderror"
                         maxlength="4" wire:model='graduation_class' name="graduation_class" placeholder="Ex: 2016">
                     <span class="invalid-feedback"> @error('graduation_class') {{ $message }} @enderror </span>
                 </div>
@@ -84,7 +85,7 @@
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row mb-3">
             <div class="col-md-12">
                 <div class="mb-3">
                     <div class="form-label">No período da aiva, sofreu punição disciplinar?</div>
@@ -119,43 +120,40 @@
                     </div>
                 </div>
             @endif
-
-            <div class="row mb-3">
-                <div class="col-md-3">
-                    <div class="mb-3">
-                        <label class="form-label">Curso de Graduação</label>
-                        <input type="text" class="form-control @error('academic_degree_name'){{ 'is-invalid' }}@enderror"
-                            wire:model='academic_degree_name' name="academic_degree_name">
-                        <span class="invalid-feedback"> @error('academic_degree_name') {{ $message }} @enderror </span>
-                    </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <label class="form-label">Nome da Graduação</label>
+                    <input type="text" class="form-control @error('academic_degree_name'){{ 'is-invalid' }}@enderror"
+                        wire:model='academic_degree_name' name="academic_degree_name">
+                    <span class="invalid-feedback"> @error('academic_degree_name') {{ $message }} @enderror </span>
                 </div>
-                <div class="col-md-3">
-                    <div class="mb-3">
-                        <label class="form-label">Instituição de Formação</label>
-                        <input type="text" class="form-control @error('academic_institution_name'){{ 'is-invalid' }}@enderror" min="0" max="12"
-                            wire:model='academic_institution_name' name=academic_institution_name placeholder="MÊSES">
-                        <span class="invalid-feedback"> @error('year_service_time') {{ $message }} @enderror </span>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="mb-3">
-                        <label class="form-label">Cidade</label>
-                        <input type="number" class="form-control @error('day_service_time'){{ 'is-invalid' }}@enderror" min="0" max="31"
-                            wire:model='day_service_time' name=day_service_time placeholder="DIAS">
-                        <span class="invalid-feedback"> @error('day_service_time') {{ $message }} @enderror </span>
-                    </div>
-                </div>
-                <div class="col-md-2">
-                    <div class="mb-3">
-                        <label class="form-label">Ano de Conclusão</label>
-                        <input type="number" class="form-control @error('day_service_time'){{ 'is-invalid' }}@enderror" min="0" max="31"
-                            wire:model='day_service_time' name=day_service_time placeholder="DIAS">
-                        <span class="invalid-feedback"> @error('day_service_time') {{ $message }} @enderror </span>
-                    </div>
-                </div>
-
             </div>
-
+            <div class="col-md-3">
+                <div class="mb-3">
+                    <label class="form-label">Instituição</label>
+                    <input type="text" class="form-control @error('academic_institution_name'){{ 'is-invalid' }}@enderror"
+                        wire:model='academic_institution_name' name="academic_institution_name">
+                    <span class="invalid-feedback"> @error('academic_institution_name') {{ $message }} @enderror </span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="mb-3">
+                    <label class="form-label">Cidade</label>
+                    <input type="text" class="form-control @error('academic_institution_city'){{ 'is-invalid' }}@enderror"
+                        wire:model='academic_institution_city' name="academic_institution_city">
+                    <span class="invalid-feedback"> @error('academic_institution_city') {{ $message }} @enderror </span>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="mb-3">
+                    <label class="form-label">Ano de Conclusão</label>
+                    <input type="number" class="form-control @error('academic_graduation_date'){{ 'is-invalid' }}@enderror" maxlength="4"
+                        wire:model='academic_graduation_date' name="academic_graduation_date">
+                    <span class="invalid-feedback"> @error('academic_graduation_date') {{ $message }} @enderror </span>
+                </div>
+            </div>
         </div>
         <div class="row mb-3">
             <div class="offset-md-9 col-md-3">

@@ -10,10 +10,14 @@ use Livewire\Component;
 class Form extends Component
 {
     public $showPunishmentLevel = false;
+    public $contest_notice_id, $candidate_id, $contest_area_id;
     public $punishment, $punishment_level, $combat_arm, $last_rank_degree, $military_organization, $course_score, $graduation_class;
-    public $year_service_time, $month_service_time, $day_service_time, $candidate_id, $contest_area_id;
+    public $year_service_time, $month_service_time, $day_service_time;
 
-    protected $listeners = ['contestRegister' => 'createForm'];
+
+    public function getContestNoticeId($contest){
+        dd($contest);
+    }
 
     public function render()
     {
