@@ -28,7 +28,7 @@ class ContestNotice extends Model
         return $this->hasMany(ContestArea::class, 'contest_notice_id', 'id');
     }
 
-    public function contestNoticeForms(){
+    public function forms(){
         return $this->hasOneThrough(Form::class, ContestArea::class);
     }
 }

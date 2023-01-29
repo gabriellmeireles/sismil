@@ -2,11 +2,7 @@
 @section('page-title', 'Finalizar Cadastro - '. config('app.name'))
 @section('content')
 
-    @if (Session::get('message'))
-        <div class="alert alert-info">
-            {!! Session::get('message') !!}
-        </div>
-    @endif
+
 @livewire('user.user.profile-header')
 
 <hr>

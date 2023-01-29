@@ -9,12 +9,6 @@ use Livewire\Component;
 
 class Dashboard extends Component
 {
-    public function register($contest)
-    {
-        return redirect()->route('user.contest-register',['contest' => $contest]);
-        dd($contest);
-    }
-
     public function render()
     {
         return view('livewire.user.user.dashboard',[

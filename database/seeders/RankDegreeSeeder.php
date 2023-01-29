@@ -21,6 +21,22 @@ class RankDegreeSeeder extends Seeder
             'short_name' => 'Admin'
         ]);
         RankDegree::create([
+            'full_name' => 'Coronel',
+            'short_name' => 'Cel',
+        ]);
+        RankDegree::create([
+            'full_name' => 'Tenente Coronel',
+            'short_name' => 'TC'
+        ]);
+        RankDegree::create([
+            'full_name' => 'Major',
+            'short_name' => 'Maj'
+        ]);
+        RankDegree::create([
+            'full_name' => 'Capitão',
+            'short_name' => 'Cap'
+        ]);
+        RankDegree::create([
             'full_name' => '1º Tenente',
             'short_name' => '1º Ten'
         ]);
