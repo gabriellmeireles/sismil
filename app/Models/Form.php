@@ -32,5 +32,8 @@ class Form extends Model
         return $this->belongsTo(Candidate::class, 'candidate_id', 'id');
     }
 
+    public function contestNotice(){
+        return $this->belongsTo(ContestNotice::class);
+    }
 
 }

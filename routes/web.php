@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\FormController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -61,7 +62,6 @@ Route::group(['prefix'=>'admin', 'middleware'=>['checkUserType:admin','auth','pr
 Route::group(['prefix'=>'user', 'middleware'=>['checkUserType:user','auth','prevent.back.history']], function(){
     Route::get('dashboard',[UserController::class, 'index'])->name('user.dashboard');
     Route::get('profile',[UserController::class, 'profile'])->name('user.profile');
-    Route::view('editais', 'user.form.index')->name('user.contest');
-    Route::view('ficha-inscricao', 'user.form.form')->name('user.contest-register');
+    Route::get('inscricao/{id}',[FormController::class, 'index'])->name('user.contest-registration');
 
 });
