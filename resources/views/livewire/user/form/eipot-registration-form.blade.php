@@ -141,7 +141,7 @@
         <div class="row mb-3">
             <div class="col-md-3 col-lg-3">
                 <div class="mb-3">
-                    <label class="form-label">Nome da Graduação</label>
+                    <label class="form-label">Nome do Curso Superior</label>
                     <input type="text" class="form-control @error('academic_degree_name'){{ 'is-invalid' }}@enderror"
                         wire:model='academic_degree_name' name="academic_degree_name">
                     <span class="invalid-feedback"> @error('academic_degree_name') {{ $message }} @enderror </span>
