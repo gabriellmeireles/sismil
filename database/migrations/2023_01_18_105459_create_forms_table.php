@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('forms', function (Blueprint $table) {
             $table->id();
             $table->string('military_organization');
-            $table->float('course_score');
+            $table->float('course_score',5,3);
             $table->string('graduation_class');
             $table->tinyInteger('year_service_time');
             $table->tinyInteger('month_service_time');
