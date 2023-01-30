@@ -33,7 +33,7 @@ class Form extends Component
 
         $this->candidate_id = Candidate::where('user_id',auth()->user()->id)->first()->id;
         $this->cities = City::all()->where('status', 1);
-        $this->last_rank_degrees = RankDegree::all()->where('status', 1)->where('id','!=',1);
+        $this->last_rank_degrees = RankDegree::all()->where('status', 1)->where('id','!=',0);
 
 
     }
